@@ -1,4 +1,4 @@
-name: Build and Publish Yarn Package
+name: Build Yarn Package
 
 # Trigger workflow on pushes of version tags (e.g. "v1.0.0")
 on:
@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       # Check out the repository
