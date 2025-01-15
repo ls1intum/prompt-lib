@@ -20,6 +20,9 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@ls1tum'
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install dependencies
         working-directory: ./prompt-shared-state
         run: yarn --frozen-lockfile
