@@ -1,0 +1,30 @@
+name: Build and Publish Yarn Package
+
+# Trigger workflow on pushes of version tags (e.g. "v1.0.0")
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Node.js with Yarn, caching Yarn dependencies.
+
+      - name: Use Node.js
+        working-directory: ./prompt-shared-state
+        uses: actions/setup-node@v4
+        with:
+          node-version: '23.x'
+
+      - name: Install dependencies
+        working-directory: ./prompt-shared-state
+        run: yarn --frozen-lockfile
+
+      - name: Build package
+        working-directory: ./prompt-shared-state
+        run: yarn build

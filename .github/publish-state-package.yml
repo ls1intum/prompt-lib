@@ -1,0 +1,35 @@
+name: Publish Package to github
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+       # Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        working-directory: ./prompt-shared-state
+        with:
+          node-version: '23.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@ls1tum'
+
+      - name: Install dependencies
+        working-directory: ./prompt-shared-state
+        run: yarn --frozen-lockfile
+      
+      - name: Build package
+        working-directory: ./prompt-shared-state
+        run: yarn build
+
+      - run: yarn npm publish
+        working-directory: ./prompt-shared-state
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
