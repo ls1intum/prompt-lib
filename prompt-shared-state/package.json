@@ -2,7 +2,7 @@
     "name": "@ls1tum/prompt-shared-state",
     "version": "0.0.1",
     "publishConfig": {
-      "registry": "https://npm.pkg.github.com"
+        "registry": "https://npm.pkg.github.com"
     },
     "main": "./dist/esm/index.js",
     "module": "./dist/esm/index.js",
