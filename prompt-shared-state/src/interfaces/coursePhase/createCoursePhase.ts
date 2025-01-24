@@ -1,5 +1,5 @@
 export interface CreateCoursePhase {
-  courseId: string
+  courseID: string
   name: string
   isInitialPhase: boolean
   coursePhaseTypeID: string
