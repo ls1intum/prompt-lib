@@ -1,8 +1,9 @@
 {
-    "name": "@ls1tum/prompt-shared-state",
-    "version": "0.0.1",
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+    "name": "@ls1intum/prompt-shared-state",
+    "version": "0.0.2",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ls1intum/prompt-lib.git"
     },
     "main": "./dist/esm/index.js",
     "module": "./dist/esm/index.js",
