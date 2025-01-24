@@ -1,17 +1,17 @@
 {
-    "name": "@ls1intum/prompt-shared-state",
-    "version": "0.0.2",
+    "name": "@tumaet/prompt-shared-state",
+    "version": "0.0.3",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ls1intum/prompt-lib.git"
     },
-    "main": "./dist/esm/index.js",
-    "module": "./dist/esm/index.js",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
     "types": "./dist/types/index.d.ts",
     "license": "MIT",
     "exports": {
-        ".": "./dist/esm/index.js",
-        "./*": "./dist/esm/*"
+        ".": "./dist/index.js",
+        "./*": "./dist/*"
     },
     "files": [
         "dist"

@@ -3,7 +3,7 @@
     "target": "ESNext",                // Use the latest ECMAScript features
     "module": "ESNext",                // Specify the module system for ESM
     "moduleResolution": "node",        // Resolve modules like Node.js
-    "outDir": "dist/esm",              // Output directory for compiled files
+    "outDir": "dist",              // Output directory for compiled files
     "declaration": true,               // Generate TypeScript declaration files
     "declarationDir": "dist/types",    // Output directory for type declarations
     "sourceMap": true,                 // Generate source maps for debugging
