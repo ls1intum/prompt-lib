@@ -8,6 +8,7 @@ export interface Course {
   courseType: string
   ects: number
   semesterTag: string
-  metaData: { [key: string]: any }
+  restrictedData: { [key: string]: any }
+  studentReadableData: { [key: string]: any }
   coursePhases: Array<CoursePhaseWithType>
 }

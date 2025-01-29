@@ -2,7 +2,8 @@ export interface CoursePhaseWithMetaData {
   id: string
   courseID: string
   name: string
-  metaData: { [key: string]: any }
+  restrictedData: { [key: string]: any }
+  studentReadableData: { [key: string]: any }
   isInitialPhase: boolean
   coursePhaseTypeID: string
 }
