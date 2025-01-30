@@ -5,5 +5,6 @@ export interface UpdateCoursePhaseParticipation {
   coursePhaseID: string
   courseParticipationID: string
   passStatus?: PassStatus
-  metaData: { [key: string]: any }
+  restrictedData: { [key: string]: any }
+  studentReadableData: { [key: string]: any }
 }

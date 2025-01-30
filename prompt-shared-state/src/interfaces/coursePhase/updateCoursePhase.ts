@@ -1,5 +1,6 @@
 export interface UpdateCoursePhase {
   id: string
   name?: string
-  metaData?: { [key: string]: any }
+  restrictedData?: { [key: string]: any }
+  studentReadableData?: { [key: string]: any }
 }
