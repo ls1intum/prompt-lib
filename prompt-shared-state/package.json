@@ -1,6 +1,6 @@
 {
     "name": "@tumaet/prompt-shared-state",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ls1intum/prompt-lib.git"
