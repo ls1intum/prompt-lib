@@ -2,13 +2,14 @@ import { create } from 'zustand'
 import { Course } from '../interfaces/course/course'
 
 interface CourseStoreState {
-  selectedCourse?: Course
   courses: Course[]
   ownCourseIDs: string[]
 }
 
 interface CourseStoreAction {
-  setSelectedCourse: (selectedCourse?: Course) => void
+  setSelectedCourseID: (selectedCourseID: string) => void
+  getSelectedCourseID: () => string | null
+  removeSelectedCourseID: () => void
   setCourses: (courses: Course[]) => void
   setOwnCourseIDs: (ownCourseIDs: string[]) => void
   isStudentOfCourse: (courseID: string) => boolean
@@ -17,14 +18,14 @@ interface CourseStoreAction {
 export const useCourseStore = create<CourseStoreState & CourseStoreAction>((set) => ({
   courses: [],
   ownCourseIDs: [],
-  setSelectedCourse: (selectedCourse?: Course) => {
-    if (selectedCourse) {
-      localStorage.setItem('selected-course', selectedCourse.id)
-    } else {
-      localStorage.removeItem('selected-course')
-    }
-
-    set({ selectedCourse })
+  getSelectedCourseID: () => {
+    return localStorage.getItem('selected-course')
+  },
+  setSelectedCourseID: (selectedCourseID: string) => {
+    localStorage.setItem('selected-course', selectedCourseID)
+  },
+  removeSelectedCourseID: () => {
+    localStorage.removeItem('selected-course')
   },
   setCourses: (courses: Course[]) => set({ courses }),
   setOwnCourseIDs: (ownCourseIDs: string[]) => set({ ownCourseIDs }),
