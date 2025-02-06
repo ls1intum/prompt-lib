@@ -1,0 +1,99 @@
+name: Publish Package to npmjs
+
+on:
+  push:
+    branches:
+      - main
+    # This restricts the workflow to run only if files in `prompt-shared-state/` changed.
+    paths:
+      - 'prompt-shared-state/**'
+
+permissions:
+  contents: write  # Allows committing the version bump back to the repo
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '23.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Determine version bump from commit message
+        id: version_bump
+        run: |
+          # Grab the latest commit message
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+          # Default to patch.
+          VERSION_TYPE="patch"
+
+          # If the commit message contains '[major]' or '[minor]', set accordingly
+          if [[ "$COMMIT_MESSAGE" == *"[major]"* ]]; then
+            VERSION_TYPE="major"
+          elif [[ "$COMMIT_MESSAGE" == *"[minor]"* ]]; then
+            VERSION_TYPE="minor"
+          fi
+
+          echo "VERSION_TYPE=$VERSION_TYPE" >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies
+        run: |
+          cd prompt-shared-state
+          yarn install
+
+      - name: Bump version
+        run: |
+          cd prompt-shared-state
+          VERSION_TYPE="${{ steps.version_bump.outputs.VERSION_TYPE }}"
+          echo "Bumping version type: $VERSION_TYPE"
+
+          case "$VERSION_TYPE" in
+            major)
+              yarn version --major
+              ;;
+            minor)
+              yarn version --minor
+              ;;
+            *)
+              yarn version --patch
+              ;;
+          esac
+
+      - name: Commit version bump
+        run: |
+          # Configure git
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          # Stage and commit changes if package.json or yarn.lock changed in subfolder
+          git add prompt-shared-state/package.json prompt-shared-state/yarn.lock || true
+          if ! git diff --cached --exit-code; then
+            # Pull out the newly bumped version from package.json in subfolder
+            NEW_VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
+            git commit -m "chore: bump prompt-shared-state version to $NEW_VERSION [skip ci]"
+            git push origin HEAD:main
+          else
+            echo "No version bump commit required."
+          fi
+
+      - name: Build the package
+        run: |
+          cd prompt-shared-state
+          yarn build
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          echo "Publishing package to npm..."
+          cd prompt-shared-state
+          yarn npm publish
