@@ -58,13 +58,13 @@ jobs:
 
           case "$VERSION_TYPE" in
             major)
-              yarn version --major
+              yarn version major
               ;;
             minor)
-              yarn version --minor
+              yarn version minor
               ;;
             *)
-              yarn version --patch
+              yarn version patch
               ;;
           esac
 
