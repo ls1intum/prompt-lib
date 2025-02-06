@@ -74,7 +74,6 @@ new ModuleFederationPlugin({
     }, 
 }); 
 ``` 
-
 This ensures there is only **one** instance of the shared state library at runtime.
 
 ## Best Practices 
