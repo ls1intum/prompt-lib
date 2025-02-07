@@ -27,6 +27,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@tumaet'
           always-auth: true
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Enable Corepack
         run: corepack enable
