@@ -1,12 +1,14 @@
 name: Publish Package to npmjs
 
 on:
-  push:
-    branches:
-      - main
-    # This restricts the workflow to run only if files in `prompt-shared-state/` changed.
-    paths:
-      - 'prompt-shared-state/**'
+    pull_request:
+        branches: [main]
+#   push:
+#     branches:
+#       - main
+#     # This restricts the workflow to run only if files in `prompt-shared-state/` changed.
+#     paths:
+#       - 'prompt-shared-state/**'
 
 permissions:
   contents: write  # Allows committing the version bump back to the repo
