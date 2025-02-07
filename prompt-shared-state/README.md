@@ -56,7 +56,6 @@ function MyComponent() {
     ); 
 } 
 ``` 
-
 Any changes to the store will be reflected across all microfrontends using this library. 
 
 ### Module Federation Configuration 
