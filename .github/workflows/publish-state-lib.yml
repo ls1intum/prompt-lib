@@ -106,11 +106,8 @@ jobs:
         
         with:
           script: |
-            const core = require('@actions/core');
-            const github = require('@actions/github');
-
-            const branchName = ${{ steps.commit_bump.outputs.branch_name }};
-            const newVersion =  ${{ steps.commit_bump.outputs.new_version }};
+            const branchName = "${{ steps.commit_bump.outputs.branch_name }}"";
+            const newVersion =  "${{ steps.commit_bump.outputs.new_version }}";
 
             const { data: pullRequest } = await github.pulls.create({
               owner: github.context.repo.owner,
