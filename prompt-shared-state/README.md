@@ -101,3 +101,5 @@ Include **one** of the following keywords in your commit message to indicate how
   - Increments the patch version by default (e.g. `1.2.3` → `1.2.4`).
 
 If you do not include `major` or `minor` in your commit message, the workflow will assume a **patch** update.
+
+When the publishing worked, then a PR with a new version number has been opened. This shall be merged immediately. 
