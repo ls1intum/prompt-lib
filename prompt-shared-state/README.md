@@ -91,7 +91,6 @@ Once your changes are reviewed and merged into the `main` branch, a GitHub workf
 2. Publish the updated package to the npm registry.
 
 ### Commit Message Keywords
-
 Include **one** of the following keywords in your commit message to indicate how the version should be bumped:
 
 - **major**  
