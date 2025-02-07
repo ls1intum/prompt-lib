@@ -13,6 +13,9 @@ on:
 permissions:
   contents: write  # Allows committing the version bump back to the repo
 
+env:
+  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
