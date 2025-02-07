@@ -11,6 +11,9 @@ on:
 permissions:
   contents: write  # Allows committing the version bump back to the repo
 
+env:
+  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -23,8 +26,6 @@ jobs:
         with:
           node-version: '23.x'
           registry-url: 'https://registry.npmjs.org'
-          scope: '@tumaet'
-          always-auth: true
 
       - name: Enable Corepack
         run: corepack enable
@@ -88,13 +89,15 @@ jobs:
           fi
 
       - name: Build the package
+        env:
+            NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           cd prompt-shared-state
           yarn build
 
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           echo "Publishing package to npm..."
           cd prompt-shared-state
