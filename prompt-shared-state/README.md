@@ -58,7 +58,6 @@ function MyComponent() {
 ``` 
 Any changes to the store will be reflected across all microfrontends using this library. 
 
-
 ### Module Federation Configuration 
 For the state to be truly _shared_ among all microfrontends, configure **Module Federation** to treat `@tumaet/prompt-shared-state` as a singleton: 
 

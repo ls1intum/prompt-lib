@@ -109,14 +109,14 @@ jobs:
             const branchName = "${{ steps.commit_bump.outputs.branch_name }}";
             const newVersion =  "${{ steps.commit_bump.outputs.new_version }}";
 
-            const { data: pullRequest } = await github.pulls.create({
-              owner: github.context.repo.owner,
-              repo: github.context.repo.repo,
-              title: `chore: bump prompt-shared-state version to ${newVersion}`,
-              head: branchName,
-              base: 'main',
-              body: 'This pull request was automatically opened by the version bump workflow.',
-              draft: false
+             const { data: pullRequest } = await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `chore: bump prompt-shared-state version to ${newVersion}`,
+                head: branchName,
+                base: 'main',
+                body: 'This pull request was automatically opened by the version bump workflow.',
+                draft: false
             });
             
             core.setOutput('pull_request_number', pullRequest.number);
