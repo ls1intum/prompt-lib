@@ -22,8 +22,6 @@ jobs:
 
       - name: Set up Node
         uses: actions/setup-node@v4
-        env:
-            NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         with:
           node-version: '23.x'
           registry-url: 'https://registry.npmjs.org'
@@ -90,6 +88,8 @@ jobs:
     #       fi
 
       - name: Build the package
+        env:
+            NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           cd prompt-shared-state
           yarn build
