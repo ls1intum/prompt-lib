@@ -11,8 +11,6 @@ permissions:
   contents: write  # Required for creating branches/PRs
   pull-requests: write  # Required for opening pull requests
 
-env:
-  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
 jobs:
   publish:
@@ -25,7 +23,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '23.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Enable Corepack
@@ -126,6 +124,8 @@ jobs:
           
       - name: Build the package
         if: ${{ steps.commit_bump.outputs.branch_name != '' }}
+        env:
+            NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           cd prompt-shared-state
           yarn build
