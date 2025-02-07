@@ -1,14 +1,12 @@
 name: Publish Package to npmjs
 
 on:
-    pull_request:
-        branches: [main]
-#   push:
-#     branches:
-#       - main
-#     # This restricts the workflow to run only if files in `prompt-shared-state/` changed.
-#     paths:
-#       - 'prompt-shared-state/**'
+  push:
+    branches:
+      - main
+    # This restricts the workflow to run only if files in `prompt-shared-state/` changed.
+    paths:
+      - 'prompt-shared-state/**'
 
 permissions:
   contents: write  # Allows committing the version bump back to the repo
@@ -32,63 +30,63 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-    #   - name: Determine version bump from commit message
-    #     id: version_bump
-    #     run: |
-    #       # Grab the latest commit message
-    #       COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+      - name: Determine version bump from commit message
+        id: version_bump
+        run: |
+          # Grab the latest commit message
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 
-    #       # Default to patch.
-    #       VERSION_TYPE="patch"
+          # Default to patch.
+          VERSION_TYPE="patch"
 
-    #       # If the commit message contains '[major]' or '[minor]', set accordingly
-    #       if [[ "$COMMIT_MESSAGE" == *"[major]"* ]]; then
-    #         VERSION_TYPE="major"
-    #       elif [[ "$COMMIT_MESSAGE" == *"[minor]"* ]]; then
-    #         VERSION_TYPE="minor"
-    #       fi
+          # If the commit message contains '[major]' or '[minor]', set accordingly
+          if [[ "$COMMIT_MESSAGE" == *"[major]"* ]]; then
+            VERSION_TYPE="major"
+          elif [[ "$COMMIT_MESSAGE" == *"[minor]"* ]]; then
+            VERSION_TYPE="minor"
+          fi
 
-    #       echo "VERSION_TYPE=$VERSION_TYPE" >> "$GITHUB_OUTPUT"
+          echo "VERSION_TYPE=$VERSION_TYPE" >> "$GITHUB_OUTPUT"
 
       - name: Install dependencies
         run: |
           cd prompt-shared-state
           yarn install
 
-    #   - name: Bump version
-    #     run: |
-    #       cd prompt-shared-state
-    #       VERSION_TYPE="${{ steps.version_bump.outputs.VERSION_TYPE }}"
-    #       echo "Bumping version type: $VERSION_TYPE"
+      - name: Bump version
+        run: |
+          cd prompt-shared-state
+          VERSION_TYPE="${{ steps.version_bump.outputs.VERSION_TYPE }}"
+          echo "Bumping version type: $VERSION_TYPE"
 
-    #       case "$VERSION_TYPE" in
-    #         major)
-    #           yarn version major
-    #           ;;
-    #         minor)
-    #           yarn version minor
-    #           ;;
-    #         *)
-    #           yarn version patch
-    #           ;;
-    #       esac
+          case "$VERSION_TYPE" in
+            major)
+              yarn version major
+              ;;
+            minor)
+              yarn version minor
+              ;;
+            *)
+              yarn version patch
+              ;;
+          esac
 
-    #   - name: Commit version bump
-    #     run: |
-    #       # Configure git
-    #       git config user.name "github-actions"
-    #       git config user.email "github-actions@github.com"
+      - name: Commit version bump
+        run: |
+          # Configure git
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-    #       # Stage and commit changes if package.json or yarn.lock changed in subfolder
-    #       git add prompt-shared-state/package.json prompt-shared-state/yarn.lock || true
-    #       if ! git diff --cached --exit-code; then
-    #         # Pull out the newly bumped version from package.json in subfolder
-    #         NEW_VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
-    #         git commit -m "chore: bump prompt-shared-state version to $NEW_VERSION [skip ci]"
-    #         git push origin HEAD:main
-    #       else
-    #         echo "No version bump commit required."
-    #       fi
+          # Stage and commit changes if package.json or yarn.lock changed in subfolder
+          git add prompt-shared-state/package.json prompt-shared-state/yarn.lock || true
+          if ! git diff --cached --exit-code; then
+            # Pull out the newly bumped version from package.json in subfolder
+            NEW_VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
+            git commit -m "chore: bump prompt-shared-state version to $NEW_VERSION [skip ci]"
+            git push origin HEAD:main
+          else
+            echo "No version bump commit required."
+          fi
 
       - name: Build the package
         env:
