@@ -27,5 +27,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Build package
+        env:
+          NPM_AUTH_TOKEN: '' # Required for publishing to npm but for building, it's not needed
         working-directory: ./prompt-shared-state
         run: yarn build
