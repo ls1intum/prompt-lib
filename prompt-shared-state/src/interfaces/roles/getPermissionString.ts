@@ -10,5 +10,5 @@ export const getPermissionString = (
     return role
   }
 
-  return `${courseName}-${courseSemesterTag}-${role}`
+  return `${courseSemesterTag}-${courseName}-${role}`
 }
