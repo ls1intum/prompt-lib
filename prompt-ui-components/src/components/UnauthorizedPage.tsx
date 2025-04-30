@@ -10,7 +10,7 @@ interface UnauthorizedPageProps {
   customMessage?: string
 }
 
-export default function UnauthorizedPage({
+export function UnauthorizedPage({
   onLogout,
   backUrl,
   customMessage,

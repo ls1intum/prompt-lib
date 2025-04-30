@@ -1,4 +1,6 @@
 export * from './ui'
+export * from './dialog'
+export * from './table'
 export * from './minimal-tiptap'
 export * from './DatePicker'
 export * from './DateRangePicker'
