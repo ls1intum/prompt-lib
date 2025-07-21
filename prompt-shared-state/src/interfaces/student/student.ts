@@ -1,10 +1,8 @@
+import { Person } from '../person/person'
 import { Gender } from './gender'
 import { StudyDegree } from './studyDegree'
 
-export interface Student {
-  id?: string
-  firstName: string
-  lastName: string
+export interface Student extends Person {
   email: string
   matriculationNumber?: string
   universityLogin?: string
