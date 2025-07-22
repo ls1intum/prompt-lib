@@ -1,0 +1,38 @@
+name: Build Packages
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - name: "prompt-shared-state"
+            path: "prompt-shared-state"
+          - name: "prompt-ui-components"
+            path: "prompt-ui-components"
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.package.path }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '23.x'
+      
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies for ${{ matrix.package.name }}
+        run: yarn install --frozen-lockfile
+
+      - name: Build ${{ matrix.package.name }}
+        run: yarn build
