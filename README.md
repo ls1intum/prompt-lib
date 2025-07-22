@@ -7,13 +7,48 @@ This repository contains two npm packages:
 - `@tumaet/prompt-shared-state` - Shared state management and interfaces
 - `@tumaet/prompt-ui-components` - Reusable UI components
 
-## 📦 Publishing Packages
+## Prerequisites
+
+This project uses **Yarn 4.1.0** as specified in the `packageManager` field of each package.json. To work with this repository, you need to enable Corepack, which will automatically use the correct Yarn version.
+
+### Enable Corepack
+
+```bash
+corepack enable
+```
+
+Corepack is included by default with Node.js 16.9+ and 14.19+. If you encounter this error:
+
+```text
+error This project's package.json defines "packageManager": "yarn@4.1.0". However the current global version of Yarn is 1.22.22.
+```
+
+Run `corepack enable` to fix it. This tells your system to use the project-specific Yarn version instead of the global one.
+
+## Publishing Packages
 
 Both packages are automatically published to npm when you create a GitHub release. Follow these steps:
 
 ### 1. Update Package Versions
 
-Before creating a release, ensure both `package.json` files have the same version number that matches your intended release tag:
+Before creating a release, ensure both `package.json` files have the same version number that matches your intended release tag.
+
+You can update the version using yarn commands:
+
+```bash
+# Update both packages with semantic versioning
+cd prompt-shared-state
+yarn version patch    # 1.2.3 -> 1.2.4
+# or yarn version minor  # 1.2.3 -> 1.3.0  
+# or yarn version major  # 1.2.3 -> 2.0.0
+
+cd ../prompt-ui-components  
+yarn version patch    # Use the same increment type
+# or yarn version minor
+# or yarn version major
+```
+
+Or manually edit the package.json files:
 
 ```bash
 # Update prompt-shared-state/package.json
