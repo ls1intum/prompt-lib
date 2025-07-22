@@ -17,7 +17,7 @@ jobs:
       version: ${{ steps.extract_version.outputs.VERSION }}
     strategy:
       matrix:
-        package:
+        include:
           - name: "prompt-shared-state"
             path: "prompt-shared-state"
           - name: "prompt-ui-components"
@@ -36,30 +36,30 @@ jobs:
           echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Publishing version: $VERSION"
 
-      - name: Validate ${{ matrix.package.name }} version matches release tag
+      - name: Validate ${{ matrix.name }} version matches release tag
         run: |
           RELEASE_VERSION="${{ steps.extract_version.outputs.VERSION }}"
           
           # Check package version
-          PACKAGE_VERSION=$(node -p "require('./${{ matrix.package.path }}/package.json').version")
+          PACKAGE_VERSION=$(node -p "require('./${{ matrix.path }}/package.json').version")
           if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
-            echo "❌ ERROR: Version mismatch in ${{ matrix.package.name }}!"
+            echo "❌ ERROR: Version mismatch in ${{ matrix.name }}!"
             echo "   Release tag version: $RELEASE_VERSION"
             echo "   Package.json version: $PACKAGE_VERSION"
             echo ""
-            echo "Please update the version in ${{ matrix.package.path }}/package.json to match the release tag."
+            echo "Please update the version in ${{ matrix.path }}/package.json to match the release tag."
             echo "Expected: \"version\": \"$RELEASE_VERSION\""
             exit 1
           fi
           
-          echo "✅ ${{ matrix.package.name }} version matches release tag: $RELEASE_VERSION"
+          echo "✅ ${{ matrix.name }} version matches release tag: $RELEASE_VERSION"
 
   publish:
     needs: validate
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package:
+        include:
           - name: "prompt-shared-state"
             path: "prompt-shared-state"
             npm_name: "@tumaet/prompt-shared-state"
@@ -69,7 +69,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ${{ matrix.package.path }}
+        working-directory: ${{ matrix.path }}
 
     steps:
       - name: Check out repository
@@ -84,15 +84,15 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Install dependencies for ${{ matrix.package.name }}
+      - name: Install dependencies for ${{ matrix.name }}
         run: yarn install
 
-      - name: Build ${{ matrix.package.name }}
+      - name: Build ${{ matrix.name }}
         run: yarn build
 
-      - name: Publish ${{ matrix.package.npm_name }} to npm
+      - name: Publish ${{ matrix.npm_name }} to npm
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
-          echo "Publishing ${{ matrix.package.npm_name }} to npm..."
+          echo "Publishing ${{ matrix.npm_name }} to npm..."
           yarn npm publish

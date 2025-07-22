@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package:
+        include:
           - name: "prompt-shared-state"
             path: "prompt-shared-state"
           - name: "prompt-ui-components"
@@ -20,7 +20,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ${{ matrix.package.path }}
+        working-directory: ${{ matrix.path }}
 
     steps:
       - name: Checkout repository
@@ -34,12 +34,12 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Install dependencies for ${{ matrix.package.name }}
+      - name: Install dependencies for ${{ matrix.name }}
         env:
           NPM_AUTH_TOKEN: '' # This Variable is required for this step even though it's not used
         run: yarn install --frozen-lockfile
 
-      - name: Build ${{ matrix.package.name }}
+      - name: Build ${{ matrix.name }}
         env:
           NPM_AUTH_TOKEN: '' # This Variable is required for this step even though it's not used
         run: yarn build
