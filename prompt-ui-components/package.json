@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "build:esm": "tsc --project tsconfig.json && tsc-alias",
-    "build:copy-css": "mkdir -p dist/components/minimal-tiptap/styles && cp src/components/minimal-tiptap/styles/index.css dist/components/minimal-tiptap/styles/index.css",
+    "build:copy-css": "cp src/index.css dist/index.css && mkdir -p dist/components/minimal-tiptap/styles && cp src/components/minimal-tiptap/styles/index.css dist/components/minimal-tiptap/styles/index.css",
     "build": "yarn build:esm && yarn build:copy-css",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\""
   },
