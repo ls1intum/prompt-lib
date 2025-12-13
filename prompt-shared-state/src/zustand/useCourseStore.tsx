@@ -13,6 +13,7 @@ interface CourseStoreAction {
   setCourses: (courses: Course[]) => void
   setOwnCourseIDs: (ownCourseIDs: string[]) => void
   isStudentOfCourse: (courseID: string) => boolean
+  updateCourse: (courseID: string, patch: Partial<Course>) => void
 }
 
 export const useCourseStore = create<CourseStoreState & CourseStoreAction>((set) => ({
@@ -32,4 +33,12 @@ export const useCourseStore = create<CourseStoreState & CourseStoreAction>((set)
   isStudentOfCourse: (courseID: string): boolean => {
     return useCourseStore.getState().ownCourseIDs.includes(courseID)
   },
+  updateCourse: (courseID: string, patch: Partial<Course>) =>
+  set((state) => ({
+    courses: state.courses.map((course: Course) =>
+      course.id === courseID
+        ? { ...course, ...patch }
+        : course,
+    ),
+  })),
 }))
