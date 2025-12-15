@@ -83,7 +83,7 @@
     "recharts": "^2.15.3",
     "sonner": "^2.0.3",
     "tailwind-merge": "^2.5.4",
-    "tsc-alias": "^1.8.15",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.7.3"
   },
   "devDependencies": {
