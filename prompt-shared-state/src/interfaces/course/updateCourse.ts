@@ -5,4 +5,6 @@ export interface UpdateCourseData {
   ects?: number
   restrictedData?: { [key: string]: any }
   studentReadableData?: { [key: string]: any }
+  shortDescription?: string | null
+  longDescription?: string | null
 }

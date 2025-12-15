@@ -12,6 +12,8 @@ export interface Course {
   studentReadableData: { [key: string]: any }
   template: boolean;
   archived: boolean;
-  archivedOn?: string | null; 
+  archivedOn?: string | null;
+  shortDescription?: string | null
+  longDescription?: string | null 
   coursePhases: Array<CoursePhaseWithType>
 }
