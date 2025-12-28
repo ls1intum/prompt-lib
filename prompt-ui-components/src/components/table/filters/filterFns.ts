@@ -15,12 +15,12 @@ export const numericRangeFilter: FilterFn<any> = (
   filterValue: {
     min?: string
     max?: string
-    noValue?: boolean
+    noScore?: boolean
   },
 ) => {
   const rowValue = row.getValue<number | null | undefined>(columnId)
 
-  if (filterValue?.noValue) {
+  if (filterValue?.noScore) {
     return rowValue == null
   }
 
