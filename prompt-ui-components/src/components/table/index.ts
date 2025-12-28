@@ -1,2 +1,2 @@
-export * from './SortableHeader'
-export * from './GroupActionDialog'
+export * from './tableComponents/SortableHeader'
+export * from './PromptTable'
