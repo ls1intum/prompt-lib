@@ -13,7 +13,7 @@ export function TableInfoText<TData>({ table }: TableInfoTextProps<TData>): Reac
       {selectedCount > 0 && <span className='text-foreground'>{selectedCount} selected</span>}
       <span>
         Showing {table.getFilteredRowModel().rows.length} of{' '}
-        {table.getPrePaginationRowModel().rows.length} courses
+        {table.getPrePaginationRowModel().rows.length} Rows
       </span>
     </div>
   )

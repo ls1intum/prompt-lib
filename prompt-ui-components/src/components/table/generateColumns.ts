@@ -1,7 +1,10 @@
 import { ColumnDef } from '@tanstack/react-table'
 
 function humanize(key: string) {
-  return key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())
+  return key
+    .replace(/([A-Z])/g, ' $1')
+    .trim()
+    .replace(/^./, (c) => c.toUpperCase())
 }
 
 export function generateColumns<T extends object>(data: T[]): ColumnDef<T>[] {

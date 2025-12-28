@@ -13,7 +13,7 @@ interface TableColumnVisibilityButtonProps<Type> {
   table: Table<Type>
 }
 
-export function TableColumnVisbilityButton<Type extends WithId>({
+export function TableColumnVisibilityButton<Type extends WithId>({
   table,
 }: TableColumnVisibilityButtonProps<Type>): JSX.Element {
   const columns = table.getAllColumns()

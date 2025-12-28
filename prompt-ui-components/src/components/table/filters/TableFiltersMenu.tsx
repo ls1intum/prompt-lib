@@ -2,7 +2,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Button } from '
 import { Table } from '@tanstack/react-table'
 import { TableFilter } from '../TableTypes'
 import { SelectFilterSection } from './SelectFilterSection'
-import { NumericRangeFilterSection } from './NumericRangeFilterSecion'
+import { NumericRangeFilterSection } from './NumericRangeFilterSection'
 import { Filter } from 'lucide-react'
 
 interface TableFiltersMenuProps {

@@ -2,6 +2,7 @@ import {
   ColumnDef,
   getCoreRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
@@ -15,7 +16,7 @@ import { TableInfoText } from './tableBarComponents/TableInfoText'
 import { TableHeaders } from './tableComponents/TableHeaders'
 import { TableRows } from './tableComponents/TableRows'
 import { TableProps, WithId } from './TableTypes'
-import { TableColumnVisbilityButton } from './tableBarComponents/TableColumnVisibilityButton'
+import { TableColumnVisibilityButton } from './tableBarComponents/TableColumnVisibilityButton'
 import { generateColumns } from './generateColumns'
 import { TableFiltersMenu } from './filters/TableFiltersMenu'
 import { ActiveTableFiltersBar } from './filters/ActiveTableFiltersBar'
@@ -57,6 +58,7 @@ export function PromptTable<T extends WithId>({
     getRowId: (row) => row.id!,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   })
 
   return (
@@ -64,7 +66,7 @@ export function PromptTable<T extends WithId>({
       <div className='flex items-center justify-between gap-3 flex-wrap'>
         <TableSearch value={search} onChange={(e) => setSearch(e.target.value)} />
         {filters && <TableFiltersMenu table={table} filters={filters} />}
-        <TableColumnVisbilityButton table={table} />
+        <TableColumnVisibilityButton table={table} />
         {actions && <TableActionsButton table={table} actions={actions} />}
       </div>
 

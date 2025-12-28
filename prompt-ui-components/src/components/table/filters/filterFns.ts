@@ -29,6 +29,9 @@ export const numericRangeFilter: FilterFn<any> = (
   const min = filterValue?.min ? Number(filterValue.min) : undefined
   const max = filterValue?.max ? Number(filterValue.max) : undefined
 
+  if (min !== undefined && isNaN(min)) return false
+  if (max !== undefined && isNaN(max)) return false
+
   if (min !== undefined && rowValue < min) return false
   if (max !== undefined && rowValue > max) return false
 

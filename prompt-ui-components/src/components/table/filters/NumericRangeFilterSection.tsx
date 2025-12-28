@@ -12,7 +12,11 @@ interface NumericRangeFilterSectionProps {
   noValueLabel?: string
 }
 
-export function NumericRangeFilterSection({ label, column }: NumericRangeFilterSectionProps) {
+export function NumericRangeFilterSection({
+  label,
+  column,
+  noValueLabel,
+}: NumericRangeFilterSectionProps) {
   const value =
     (column.getFilterValue() as {
       min?: string
@@ -75,7 +79,7 @@ export function NumericRangeFilterSection({ label, column }: NumericRangeFilterS
             setValue({ noScore: !value.noScore })
           }}
         >
-          No value
+          {noValueLabel ?? 'No value'}
         </DropdownMenuCheckboxItem>
       </div>
     </>
