@@ -28,7 +28,7 @@ export function DropdownMenuItemForRowAction<Type extends WithId>({
         }
       }}
     >
-      {action.icon}
+      <div className='mr-2'>{action.icon}</div>
       {action.label}
     </DropdownMenuItem>
   )
