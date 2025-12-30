@@ -5,23 +5,27 @@ export const checkboxColumn = <T extends { id: string }>(): ColumnDef<T> => ({
   id: 'select',
 
   header: ({ table }) => (
-    <Checkbox
-      checked={table.getIsAllRowsSelected()}
-      onCheckedChange={(checked) => {
-        table.toggleAllRowsSelected(!!checked)
-      }}
-      onClick={(e) => e.stopPropagation()}
-    />
+    <div className='flex items-center justify-center'>
+      <Checkbox
+        checked={table.getIsAllRowsSelected()}
+        onCheckedChange={(checked) => {
+          table.toggleAllRowsSelected(!!checked)
+        }}
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
   ),
 
   cell: ({ row }) => (
-    <Checkbox
-      checked={row.getIsSelected()}
-      onCheckedChange={(checked) => {
-        row.toggleSelected(!!checked)
-      }}
-      onClick={(e) => e.stopPropagation()}
-    />
+    <div className='flex items-center justify-center'>
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(checked) => {
+          row.toggleSelected(!!checked)
+        }}
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
   ),
 
   enableSorting: false,
