@@ -12,16 +12,18 @@ export function displaySelectActiveFilterBadgeValue(filtervalue: unknown) {
 
 export function displayMinMaxActiveFilterBadgeValue(filtervalue: unknown) {
   const v = filtervalue as minMaxFilterType
+  const hasMin = v.min !== undefined && v.min !== null && v.min !== ''
+  const hasMax = v.max !== undefined && v.max !== null && v.max !== ''
   if (v.noScore) {
     return 'None'
   }
-  if (v.min && v.max) {
+  if (hasMin && hasMax) {
     return `${v.min} - ${v.max}`
   }
-  if (v.min) {
+  if (hasMin) {
     return '≥ ' + v.min
   }
-  if (v.max) {
+  if (hasMax) {
     return '≤ ' + v.max
   }
   return ''
