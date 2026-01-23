@@ -1,4 +1,4 @@
-import { Column, ColumnDef, Table } from '@tanstack/react-table'
+import { Column, ColumnDef, InitialTableState, Table } from '@tanstack/react-table'
 
 export interface WithId {
   id: string
@@ -48,4 +48,5 @@ export interface TableProps<Type extends WithId> {
   columns?: ColumnDef<Type>[]
   filters?: TableFilter[]
   onRowClick?: (rowData: Type) => void
+  initialState?: InitialTableState
 }
