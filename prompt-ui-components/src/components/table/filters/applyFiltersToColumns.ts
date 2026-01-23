@@ -8,7 +8,7 @@ function isAccessorKeyColumn<T>(
   return 'accessorKey' in column
 }
 
-export function applyFiltersToColumns<T>(
+export function addFiltersToColumns<T>(
   columns: ColumnDef<T>[],
   filters?: TableFilter[],
 ): ColumnDef<T>[] {

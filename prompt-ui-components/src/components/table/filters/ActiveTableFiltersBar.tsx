@@ -1,6 +1,7 @@
 import { TableFilter } from '../TableTypes'
 import { Table } from '@tanstack/react-table'
 import { FilterBadge } from './FilterBadge'
+import { tableFilterTypeDisplayFunction } from './filterbadgeFns'
 
 interface ActiveTableFiltersBarProps {
   table: Table<any>
@@ -14,9 +15,7 @@ export function ActiveTableFiltersBar({ table, filters = [] }: ActiveTableFilter
     return null
   }
 
-  const filterMetaById: Record<string, TableFilter> = Object.fromEntries(
-    filters.map((f) => [f.id, f]),
-  )
+  const filterMetaById = Object.fromEntries(filters.map((f) => [f.id, f]))
 
   return (
     <div className='flex flex-wrap items-center gap-2'>
@@ -27,61 +26,32 @@ export function ActiveTableFiltersBar({ table, filters = [] }: ActiveTableFilter
         />
       )}
 
-      {columnFilters.map((filter) => {
+      {columnFilters.flatMap((filter) => {
         const meta = filterMetaById[filter.id]
         const column = table.getColumn(filter.id)
-        if (!meta || !column) return null
+        if (!meta || !column) return []
 
-        const headerLabel =
-          meta.label ??
-          (typeof column.columnDef.header === 'string' ? column.columnDef.header : filter.id)
+        const value = filter.value
+        if (value == null) return []
 
-        if (meta.type === 'select') {
-          if (!Array.isArray(filter.value)) return null
+        const render = (badgeValue: unknown, key: string, onRemove: () => void) => (
+          <FilterBadge
+            key={key}
+            label={`${meta.badge ? meta.badge.label : meta.label}: ${tableFilterTypeDisplayFunction(meta)(badgeValue)}`}
+            onRemove={onRemove}
+          />
+        )
 
-          const values = filter.value as string[]
-
-          return values.map((value: string) => (
-            <FilterBadge
-              key={`${filter.id}-${value}`}
-              label={`${headerLabel}: ${meta.getDisplay?.(value) ?? value}`}
-              onRemove={() => {
-                const next = values.filter((v: string) => v !== value)
-                column.setFilterValue(next.length > 0 ? next : undefined)
-              }}
-            />
-          ))
-        }
-
-        if (meta.type === 'numericRange') {
-          if (typeof filter.value !== 'object' || filter.value === null) {
-            return null
-          }
-
-          const value = filter.value as {
-            min?: string
-            max?: string
-            noScore?: boolean
-          }
-
-          let text = ''
-          if (value.noScore) text = meta.noValueLabel ?? 'No value'
-          else if (value.min && value.max) text = `${value.min}–${value.max}`
-          else if (value.min) text = `≥ ${value.min}`
-          else if (value.max) text = `≤ ${value.max}`
-
-          if (!text) return null
-
-          return (
-            <FilterBadge
-              key={filter.id}
-              label={`${headerLabel}: ${text}`}
-              onRemove={() => column.setFilterValue(undefined)}
-            />
+        if (Array.isArray(value)) {
+          return value.map((v) =>
+            render(v, `${filter.id}-${String(v)}`, () => {
+              const next = value.filter((x) => x !== v)
+              column.setFilterValue(next.length ? next : undefined)
+            }),
           )
         }
 
-        return null
+        return [render(value, filter.id, () => column.setFilterValue(undefined))]
       })}
     </div>
   )

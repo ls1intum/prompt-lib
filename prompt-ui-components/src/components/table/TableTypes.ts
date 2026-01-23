@@ -18,26 +18,29 @@ export interface RowAction<Type extends WithId> {
   hide?: (rows: Type[]) => boolean
 }
 
+type TableFilterBase = {
+  id: string
+  label: string
+  badge?: {
+    label: string
+    displayValue: (filtervalue: unknown) => string
+  }
+}
+
 export type TableFilter =
-  | {
+  | (TableFilterBase & {
       type: 'select'
-      id: string
-      label: string
       options: string[]
-      getDisplay?: (value: string) => React.ReactNode
-    }
-  | {
+      optionLabel?: (value: string) => React.ReactNode
+    })
+  | (TableFilterBase & {
       type: 'numericRange'
-      id: string
-      label: string
       noValueLabel?: string
-    }
-  | {
+    })
+  | (TableFilterBase & {
       type: 'custom'
-      id: string
-      label: string
       render: (args: { column: Column<any, unknown>; table: Table<any> }) => React.ReactNode
-    }
+    })
 
 export interface TableProps<Type extends WithId> {
   data: Type[]
