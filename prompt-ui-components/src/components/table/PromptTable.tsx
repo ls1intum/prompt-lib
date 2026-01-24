@@ -33,7 +33,6 @@ export function PromptTable<T extends WithId>({
   const [sorting, setSorting] = useState<SortingState>(initialState?.sorting ?? [])
   const [search, setSearch] = useState('')
   const [rowSelection, setRowSelection] = useState({})
-  const [columnVisibility, setColumnVisibility] = useState(initialState?.columnVisibility ?? {})
 
   const baseColumns = columns ?? generateColumns(data)
 
@@ -52,7 +51,6 @@ export function PromptTable<T extends WithId>({
       sorting,
       globalFilter: search,
       rowSelection,
-      columnVisibility,
     },
     initialState,
     onSortingChange: setSorting,
