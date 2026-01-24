@@ -2,8 +2,8 @@ import { TableFilter } from '../TableTypes'
 
 interface minMaxFilterType {
   noScore: boolean
-  min: string
-  max: string
+  min?: string
+  max?: string
 }
 
 export function displaySelectActiveFilterBadgeValue(filtervalue: unknown) {
@@ -12,8 +12,8 @@ export function displaySelectActiveFilterBadgeValue(filtervalue: unknown) {
 
 export function displayMinMaxActiveFilterBadgeValue(filtervalue: unknown) {
   const v = filtervalue as minMaxFilterType
-  const hasMin = v.min !== undefined && v.min !== null && v.min !== ''
-  const hasMax = v.max !== undefined && v.max !== null && v.max !== ''
+  const hasMin = v.min !== undefined && v.min !== ''
+  const hasMax = v.max !== undefined && v.max !== ''
   if (v.noScore) {
     return 'None'
   }
@@ -33,7 +33,7 @@ export function tableFilterTypeDisplayFunction(tableFilter: TableFilter) {
   if (tableFilter.badge) {
     return tableFilter.badge.displayValue
   }
-  if (tableFilter.type == 'numericRange') {
+  if (tableFilter.type === 'numericRange') {
     return displayMinMaxActiveFilterBadgeValue
   }
   return displaySelectActiveFilterBadgeValue
