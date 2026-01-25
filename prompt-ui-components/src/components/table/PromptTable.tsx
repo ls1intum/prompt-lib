@@ -20,7 +20,7 @@ import { TableColumnVisibilityButton } from './tableBarComponents/TableColumnVis
 import { generateColumns } from './generateColumns'
 import { TableFiltersMenu } from './filters/TableFiltersMenu'
 import { ActiveTableFiltersBar } from './filters/ActiveTableFiltersBar'
-import { applyFiltersToColumns } from './filters/applyFiltersToColumns'
+import { addFiltersToColumns } from './filters/applyFiltersToColumns'
 
 export function PromptTable<T extends WithId>({
   data,
@@ -28,14 +28,15 @@ export function PromptTable<T extends WithId>({
   columns,
   filters,
   onRowClick,
+  initialState,
 }: TableProps<T>): ReactElement {
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>(initialState?.sorting ?? [])
   const [search, setSearch] = useState('')
   const [rowSelection, setRowSelection] = useState({})
 
   const baseColumns = columns ?? generateColumns(data)
 
-  const columnsWithFilterFns = applyFiltersToColumns(baseColumns, filters)
+  const columnsWithFilterFns = addFiltersToColumns(baseColumns, filters)
 
   const cols: ColumnDef<T>[] = [
     checkboxColumn<T>(),
@@ -51,6 +52,7 @@ export function PromptTable<T extends WithId>({
       globalFilter: search,
       rowSelection,
     },
+    initialState,
     onSortingChange: setSorting,
     onGlobalFilterChange: setSearch,
     onRowSelectionChange: setRowSelection,

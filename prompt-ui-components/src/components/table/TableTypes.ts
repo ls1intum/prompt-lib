@@ -1,4 +1,4 @@
-import { Column, ColumnDef, Table } from '@tanstack/react-table'
+import { Column, ColumnDef, InitialTableState, Table } from '@tanstack/react-table'
 
 export interface WithId {
   id: string
@@ -18,26 +18,29 @@ export interface RowAction<Type extends WithId> {
   hide?: (rows: Type[]) => boolean
 }
 
+type TableFilterBase = {
+  id: string
+  label: string
+  badge?: {
+    label: string
+    displayValue: (filtervalue: unknown) => string
+  }
+}
+
 export type TableFilter =
-  | {
+  | (TableFilterBase & {
       type: 'select'
-      id: string
-      label: string
       options: string[]
-      getDisplay?: (value: string) => React.ReactNode
-    }
-  | {
+      optionLabel?: (value: string) => React.ReactNode
+    })
+  | (TableFilterBase & {
       type: 'numericRange'
-      id: string
-      label: string
       noValueLabel?: string
-    }
-  | {
+    })
+  | (TableFilterBase & {
       type: 'custom'
-      id: string
-      label: string
       render: (args: { column: Column<any, unknown>; table: Table<any> }) => React.ReactNode
-    }
+    })
 
 export interface TableProps<Type extends WithId> {
   data: Type[]
@@ -45,4 +48,5 @@ export interface TableProps<Type extends WithId> {
   columns?: ColumnDef<Type>[]
   filters?: TableFilter[]
   onRowClick?: (rowData: Type) => void
+  initialState?: InitialTableState
 }

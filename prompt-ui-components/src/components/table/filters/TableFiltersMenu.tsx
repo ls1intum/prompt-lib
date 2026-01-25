@@ -32,7 +32,7 @@ export function TableFiltersMenu({ table, filters }: TableFiltersMenuProps) {
                 label={filter.label}
                 column={column}
                 options={filter.options}
-                getDisplay={filter.getDisplay}
+                getDisplay={filter.optionLabel}
               />
             )
           }
