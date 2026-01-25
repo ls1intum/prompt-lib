@@ -14,7 +14,7 @@ export function UnauthorizedPage({
   onLogout,
   backUrl,
   customMessage,
-}: UnauthorizedPageProps): JSX.Element {
+}: UnauthorizedPageProps): React.JSX.Element {
   const navigate = useNavigate()
 
   return (

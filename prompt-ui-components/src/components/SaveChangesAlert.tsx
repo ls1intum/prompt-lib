@@ -15,7 +15,7 @@ export const SaveChangesAlert = ({
   handleRevert,
   saveChanges,
   onClose,
-}: SaveChangesAlertProps): JSX.Element => {
+}: SaveChangesAlertProps): React.JSX.Element => {
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const { state } = useSidebar()
