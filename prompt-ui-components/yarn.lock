@@ -2247,7 +2247,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/core@npm:^2.11.7, @tiptap/core@npm:^2.27.2":
+"@tiptap/core@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/core@npm:2.27.2"
   peerDependencies:
@@ -2295,7 +2295,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-code-block-lowlight@npm:^2.11.7":
+"@tiptap/extension-code-block-lowlight@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-code-block-lowlight@npm:2.27.2"
   peerDependencies:
@@ -2308,7 +2308,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-code-block@npm:^2.11.7, @tiptap/extension-code-block@npm:^2.27.2":
+"@tiptap/extension-code-block@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-code-block@npm:2.27.2"
   peerDependencies:
@@ -2327,7 +2327,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-color@npm:^2.11.7":
+"@tiptap/extension-color@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-color@npm:2.27.2"
   peerDependencies:
@@ -2387,7 +2387,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-heading@npm:^2.11.7, @tiptap/extension-heading@npm:^2.27.2":
+"@tiptap/extension-heading@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-heading@npm:2.27.2"
   peerDependencies:
@@ -2406,7 +2406,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-horizontal-rule@npm:^2.11.7, @tiptap/extension-horizontal-rule@npm:^2.27.2":
+"@tiptap/extension-horizontal-rule@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-horizontal-rule@npm:2.27.2"
   peerDependencies:
@@ -2416,7 +2416,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-image@npm:^2.11.7":
+"@tiptap/extension-image@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-image@npm:2.27.2"
   peerDependencies:
@@ -2434,7 +2434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-link@npm:^2.11.7":
+"@tiptap/extension-link@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-link@npm:2.27.2"
   dependencies:
@@ -2473,7 +2473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-placeholder@npm:^2.11.7":
+"@tiptap/extension-placeholder@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-placeholder@npm:2.27.2"
   peerDependencies:
@@ -2492,7 +2492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-text-style@npm:^2.11.7, @tiptap/extension-text-style@npm:^2.27.2":
+"@tiptap/extension-text-style@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-text-style@npm:2.27.2"
   peerDependencies:
@@ -2510,7 +2510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-typography@npm:^2.11.7":
+"@tiptap/extension-typography@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-typography@npm:2.27.2"
   peerDependencies:
@@ -2519,7 +2519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-underline@npm:^2.11.7":
+"@tiptap/extension-underline@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/extension-underline@npm:2.27.2"
   peerDependencies:
@@ -2528,7 +2528,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/pm@npm:^2.11.7, @tiptap/pm@npm:^2.27.2":
+"@tiptap/pm@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/pm@npm:2.27.2"
   dependencies:
@@ -2554,7 +2554,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/react@npm:^2.11.7":
+"@tiptap/react@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/react@npm:2.27.2"
   dependencies:
@@ -2572,7 +2572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/starter-kit@npm:^2.11.7":
+"@tiptap/starter-kit@npm:^2.27.2":
   version: 2.27.2
   resolution: "@tiptap/starter-kit@npm:2.27.2"
   dependencies:
@@ -2629,21 +2629,21 @@ __metadata:
     "@radix-ui/react-toggle-group": "npm:^1.1.0"
     "@radix-ui/react-tooltip": "npm:^1.1.4"
     "@tanstack/react-table": "npm:^8.21.3"
-    "@tiptap/core": "npm:^2.11.7"
-    "@tiptap/extension-code-block": "npm:^2.11.7"
-    "@tiptap/extension-code-block-lowlight": "npm:^2.11.7"
-    "@tiptap/extension-color": "npm:^2.11.7"
-    "@tiptap/extension-heading": "npm:^2.11.7"
-    "@tiptap/extension-horizontal-rule": "npm:^2.11.7"
-    "@tiptap/extension-image": "npm:^2.11.7"
-    "@tiptap/extension-link": "npm:^2.11.7"
-    "@tiptap/extension-placeholder": "npm:^2.11.7"
-    "@tiptap/extension-text-style": "npm:^2.11.7"
-    "@tiptap/extension-typography": "npm:^2.11.7"
-    "@tiptap/extension-underline": "npm:^2.11.7"
-    "@tiptap/pm": "npm:^2.11.7"
-    "@tiptap/react": "npm:^2.11.7"
-    "@tiptap/starter-kit": "npm:^2.11.7"
+    "@tiptap/core": "npm:^2.27.2"
+    "@tiptap/extension-code-block": "npm:^2.27.2"
+    "@tiptap/extension-code-block-lowlight": "npm:^2.27.2"
+    "@tiptap/extension-color": "npm:^2.27.2"
+    "@tiptap/extension-heading": "npm:^2.27.2"
+    "@tiptap/extension-horizontal-rule": "npm:^2.27.2"
+    "@tiptap/extension-image": "npm:^2.27.2"
+    "@tiptap/extension-link": "npm:^2.27.2"
+    "@tiptap/extension-placeholder": "npm:^2.27.2"
+    "@tiptap/extension-text-style": "npm:^2.27.2"
+    "@tiptap/extension-typography": "npm:^2.27.2"
+    "@tiptap/extension-underline": "npm:^2.27.2"
+    "@tiptap/pm": "npm:^2.27.2"
+    "@tiptap/react": "npm:^2.27.2"
+    "@tiptap/starter-kit": "npm:^2.27.2"
     "@types/react": "npm:^18"
     "@typescript-eslint/eslint-plugin": "npm:^8.20.0"
     "@typescript-eslint/parser": "npm:^8.20.0"
