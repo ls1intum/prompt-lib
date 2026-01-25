@@ -73,7 +73,7 @@
     "highlight.js": "^11.11.1",
     "lowlight": "^3.3.0",
     "lucide-react": "^0.503.0",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.6",
     "postcss-preset-env": "^10.1.6",
     "react": "^18.3.1",
     "react-day-picker": "8.10.1",
@@ -97,6 +97,6 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "postcss-cli": "^10.0.0",
-    "prettier": "^3.4.2"
+    "prettier": "^3.8.1"
   }
 }
