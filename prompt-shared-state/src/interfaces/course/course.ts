@@ -10,10 +10,10 @@ export interface Course {
   semesterTag: string
   restrictedData: { [key: string]: any }
   studentReadableData: { [key: string]: any }
-  template: boolean;
-  archived: boolean;
-  archivedOn?: string | null;
+  template: boolean
+  archived: boolean
+  archivedOn?: string | null
   shortDescription?: string | null
-  longDescription?: string | null 
+  longDescription?: string | null
   coursePhases: Array<CoursePhaseWithType>
 }

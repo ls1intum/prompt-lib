@@ -34,11 +34,9 @@ export const useCourseStore = create<CourseStoreState & CourseStoreAction>((set)
     return useCourseStore.getState().ownCourseIDs.includes(courseID)
   },
   updateCourse: (courseID: string, patch: Partial<Course>) =>
-  set((state) => ({
-    courses: state.courses.map((course: Course) =>
-      course.id === courseID
-        ? { ...course, ...patch }
-        : course,
-    ),
-  })),
+    set((state) => ({
+      courses: state.courses.map((course: Course) =>
+        course.id === courseID ? { ...course, ...patch } : course,
+      ),
+    })),
 }))

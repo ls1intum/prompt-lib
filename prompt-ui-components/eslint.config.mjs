@@ -13,6 +13,7 @@ export default [
       'dist/**',         // Ignore dist output
       'build/**',        // Ignore build output
       'src/components/ui/**', // Ignore UI components
+      'src/components/minimal-tiptap/**', // Ignore vendored editor components
     ],
 
     languageOptions: {
