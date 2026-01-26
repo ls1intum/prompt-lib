@@ -26,7 +26,7 @@
     "build": "yarn build:esm && yarn build:copy-css",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\""
   },
-  "packageManager": "yarn@4.1.0",
+  "packageManager": "yarn@4.12.0",
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.12",
@@ -68,7 +68,7 @@
     "@tiptap/starter-kit": "^2.27.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cmdk": "1.0.0",
+    "cmdk": "1.1.1",
     "date-fns": "^4.1.0",
     "highlight.js": "^11.11.1",
     "lowlight": "^3.3.0",
@@ -96,7 +96,10 @@
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "postcss-cli": "^10.0.0",
+    "postcss-cli": "^10.1.0",
     "prettier": "^3.8.1"
+  },
+  "resolutions": {
+    "tar": "^7.5.4"
   }
 }
