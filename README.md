@@ -9,7 +9,7 @@ This repository contains two npm packages:
 
 ## Prerequisites
 
-This project uses **Yarn 4.1.0** as specified in the `packageManager` field of each package.json. To work with this repository, you need to enable Corepack, which will automatically use the correct Yarn version.
+This project uses **Yarn 4.12.0** as specified in the `packageManager` field of each package.json. To work with this repository, you need to enable Corepack, which will automatically use the correct Yarn version.
 
 ### Enable Corepack
 
@@ -39,10 +39,10 @@ You can update the version using yarn commands:
 # Update both packages with semantic versioning
 cd prompt-shared-state
 yarn version patch    # 1.2.3 -> 1.2.4
-# or yarn version minor  # 1.2.3 -> 1.3.0  
+# or yarn version minor  # 1.2.3 -> 1.3.0
 # or yarn version major  # 1.2.3 -> 2.0.0
 
-cd ../prompt-ui-components  
+cd ../prompt-ui-components
 yarn version patch    # Use the same increment type
 # or yarn version minor
 # or yarn version major
@@ -58,9 +58,9 @@ Or manually edit the package.json files:
   ...
 }
 
-# Update prompt-ui-components/package.json  
+# Update prompt-ui-components/package.json
 {
-  "name": "@tumaet/prompt-ui-components", 
+  "name": "@tumaet/prompt-ui-components",
   "version": "1.2.3",  // ← Must match exactly
   ...
 }
@@ -132,7 +132,7 @@ cd prompt-shared-state
 yarn install
 yarn build
 
-# Build prompt-ui-components  
+# Build prompt-ui-components
 cd prompt-ui-components
 yarn install
 yarn build
@@ -149,7 +149,7 @@ cd prompt-shared-state && yarn build && cd ../prompt-ui-components && yarn build
 
 ## 📋 Package Information
 
-| Package | Latest Version | Description |
-|---------|---------------|-------------|
-| [@tumaet/prompt-shared-state](https://www.npmjs.com/package/@tumaet/prompt-shared-state) | ![npm](https://img.shields.io/npm/v/@tumaet/prompt-shared-state) | Shared state management and TypeScript interfaces |
-| [@tumaet/prompt-ui-components](https://www.npmjs.com/package/@tumaet/prompt-ui-components) | ![npm](https://img.shields.io/npm/v/@tumaet/prompt-ui-components) | Reusable React UI components |
+| Package                                                                                    | Latest Version                                                    | Description                                       |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | ------------------------------------------------- |
+| [@tumaet/prompt-shared-state](https://www.npmjs.com/package/@tumaet/prompt-shared-state)   | ![npm](https://img.shields.io/npm/v/@tumaet/prompt-shared-state)  | Shared state management and TypeScript interfaces |
+| [@tumaet/prompt-ui-components](https://www.npmjs.com/package/@tumaet/prompt-ui-components) | ![npm](https://img.shields.io/npm/v/@tumaet/prompt-ui-components) | Reusable React UI components                      |
