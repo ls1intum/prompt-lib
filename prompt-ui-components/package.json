@@ -98,5 +98,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "postcss-cli": "^10.1.0",
     "prettier": "^3.8.1"
+  },
+  "resolutions": {
+    "tar": "^7.5.4"
   }
 }
