@@ -2695,7 +2695,7 @@ __metadata:
     lowlight: "npm:^3.3.0"
     lucide-react: "npm:^0.563.0"
     postcss: "npm:^8.5.6"
-    postcss-cli: "npm:^10.0.0"
+    postcss-cli: "npm:^10.1.0"
     postcss-preset-env: "npm:^10.6.1"
     prettier: "npm:^3.8.1"
     react: "npm:^19.2.3"
@@ -5629,7 +5629,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-cli@npm:^10.0.0":
+"postcss-cli@npm:^10.1.0":
   version: 10.1.0
   resolution: "postcss-cli@npm:10.1.0"
   dependencies:
