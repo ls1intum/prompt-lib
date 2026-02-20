@@ -32,11 +32,11 @@ export function PromptTable<T extends WithId>({
   initialState,
   sortingQueryParam,
 }: TableProps<T>): ReactElement {
-  const sortingQueryParamName = sortingQueryParam?.paramName ?? 'sort'
-  const sortingQueryParamEnabled = sortingQueryParam?.enabled ?? true
+  const sortingQueryParamEnabled = sortingQueryParam ? (sortingQueryParam.enabled ?? true) : false
+  const sortingQueryParamName = sortingQueryParam?.paramName
 
   const [sorting, setSorting] = useState<SortingState>(() => {
-    if (!sortingQueryParamEnabled || typeof window === 'undefined') {
+    if (!sortingQueryParamEnabled || !sortingQueryParamName || typeof window === 'undefined') {
       return initialState?.sorting ?? []
     }
 
@@ -63,7 +63,7 @@ export function PromptTable<T extends WithId>({
   }
 
   useEffect(() => {
-    if (!sortingQueryParamEnabled || typeof window === 'undefined') return
+    if (!sortingQueryParamEnabled || !sortingQueryParamName || typeof window === 'undefined') return
 
     const url = new URL(window.location.href)
     const serializedSorting = serializeSortingForUrl(sorting)
@@ -131,9 +131,18 @@ function parseSortingFromUrl(search: string, paramName: string): SortingState {
   return serializedSorting
     .split(',')
     .map((segment) => {
-      const [id, order = 'asc'] = segment.split(':')
-      if (!id) return null
+      const [encodedId, order = 'asc'] = segment.split(':')
+      if (!encodedId) return null
       if (order !== 'asc' && order !== 'desc') return null
+
+      let id: string
+      try {
+        id = decodeURIComponent(encodedId)
+      } catch {
+        return null
+      }
+
+      if (!id) return null
 
       return {
         id,
@@ -146,5 +155,7 @@ function parseSortingFromUrl(search: string, paramName: string): SortingState {
 function serializeSortingForUrl(sorting: SortingState): string | null {
   if (sorting.length === 0) return null
 
-  return sorting.map(({ id, desc }) => `${id}:${desc ? 'desc' : 'asc'}`).join(',')
+  return sorting
+    .map(({ id, desc }) => `${encodeURIComponent(id)}:${desc ? 'desc' : 'asc'}`)
+    .join(',')
 }
