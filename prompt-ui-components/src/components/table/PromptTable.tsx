@@ -17,7 +17,7 @@ import { TableActionsButton } from './tableBarComponents/TableActionsButton'
 import { TableInfoText } from './tableBarComponents/TableInfoText'
 import { TableHeaders } from './tableComponents/TableHeaders'
 import { TableRows } from './tableComponents/TableRows'
-import { TableProps, WithId } from './TableTypes'
+import { TableFilter, TableProps, WithId } from './TableTypes'
 import { TableColumnVisibilityButton } from './tableBarComponents/TableColumnVisibilityButton'
 import { generateColumns } from './generateColumns'
 import { TableFiltersMenu } from './filters/TableFiltersMenu'
@@ -64,7 +64,7 @@ export function PromptTable<T extends WithId>({
       return initialColumnFilters
     }
 
-    const urlFilters = parseColumnFiltersFromUrl(window.location.search, filteringQueryParamName)
+    const urlFilters = parseColumnFiltersFromUrl(window.location.search, filteringQueryParamName, filters)
     return urlFilters.length > 0 ? urlFilters : initialColumnFilters
   })
   const [rowSelection, setRowSelection] = useState({})
@@ -108,7 +108,7 @@ export function PromptTable<T extends WithId>({
         url.searchParams.delete(filteringQueryParamName)
       }
 
-      if (search.trim()) {
+      if (search.length > 0) {
         url.searchParams.set(globalSearchQueryParamName, search)
       } else {
         url.searchParams.delete(globalSearchQueryParamName)
@@ -212,7 +212,11 @@ function serializeSortingForUrl(sorting: SortingState): string | null {
     .join(',')
 }
 
-function parseColumnFiltersFromUrl(search: string, paramName: string): ColumnFiltersState {
+function parseColumnFiltersFromUrl(
+  search: string,
+  paramName: string,
+  tableFilters?: TableFilter[],
+): ColumnFiltersState {
   const serializedFilters = new URLSearchParams(search).get(paramName)
   if (!serializedFilters) return []
 
@@ -225,6 +229,7 @@ function parseColumnFiltersFromUrl(search: string, paramName: string): ColumnFil
         if (!filter || typeof filter !== 'object') return null
         if (!('id' in filter) || typeof filter.id !== 'string') return null
         if (!('value' in filter)) return null
+        if (!isValidFilterValue(filter.id, filter.value, tableFilters)) return null
 
         return {
           id: filter.id,
@@ -244,4 +249,58 @@ function serializeColumnFiltersForUrl(columnFilters: ColumnFiltersState): string
 
 function parseSearchFromUrl(search: string, paramName: string): string | null {
   return new URLSearchParams(search).get(paramName)
+}
+
+function isValidFilterValue(
+  id: string,
+  value: unknown,
+  tableFilters?: TableFilter[],
+): value is ColumnFiltersState[number]['value'] {
+  if (value === null || value === undefined) return false
+
+  const tableFilter = tableFilters?.find((filter) => filter.id === id)
+  if (!tableFilter) return isJsonCompatibleFilterValue(value)
+
+  if (tableFilter.type === 'select') {
+    return Array.isArray(value) && value.every((entry) => typeof entry === 'string')
+  }
+
+  if (tableFilter.type === 'numericRange') {
+    if (!isPlainObject(value)) return false
+
+    const allowedKeys = new Set(['min', 'max', 'noScore'])
+    for (const key of Object.keys(value)) {
+      if (!allowedKeys.has(key)) return false
+    }
+
+    const min = value.min
+    const max = value.max
+    const noScore = value.noScore
+
+    if (min !== undefined && typeof min !== 'string') return false
+    if (max !== undefined && typeof max !== 'string') return false
+    if (noScore !== undefined && typeof noScore !== 'boolean') return false
+
+    return true
+  }
+
+  return isJsonCompatibleFilterValue(value)
+}
+
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+function isJsonCompatibleFilterValue(value: unknown): boolean {
+  if (value === null || value === undefined) return false
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    return true
+  }
+  if (Array.isArray(value)) {
+    return value.every((entry) => isJsonCompatibleFilterValue(entry))
+  }
+  if (isPlainObject(value)) {
+    return Object.values(value).every((entry) => isJsonCompatibleFilterValue(entry))
+  }
+  return false
 }
