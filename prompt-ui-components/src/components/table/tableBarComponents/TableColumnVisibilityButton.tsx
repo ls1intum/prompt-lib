@@ -15,7 +15,7 @@ interface TableColumnVisibilityButtonProps<Type> {
 
 export function TableColumnVisibilityButton<Type extends WithId>({
   table,
-}: TableColumnVisibilityButtonProps<Type>): JSX.Element {
+}: TableColumnVisibilityButtonProps<Type>): React.JSX.Element {
   const columns = table.getAllColumns()
   return (
     <DropdownMenu>
