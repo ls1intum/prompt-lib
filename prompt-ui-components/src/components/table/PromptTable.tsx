@@ -1,4 +1,5 @@
 import {
+  ColumnFiltersState,
   ColumnDef,
   getCoreRowModel,
   getFilteredRowModel,
@@ -31,19 +32,41 @@ export function PromptTable<T extends WithId>({
   onRowClick,
   initialState,
   sortingQueryParam,
+  filteringQueryParam,
 }: TableProps<T>): ReactElement {
-  const sortingQueryParamEnabled = sortingQueryParam ? (sortingQueryParam.enabled ?? true) : false
-  const sortingQueryParamName = sortingQueryParam?.paramName
+  const sortingQueryParamEnabled = sortingQueryParam?.enabled ?? true
+  const sortingQueryParamName = sortingQueryParam?.paramName ?? 'sorting'
+  const filteringQueryParamEnabled = filteringQueryParam?.enabled ?? true
+  const filteringQueryParamName = filteringQueryParam?.paramName ?? 'filters'
+  const globalSearchQueryParamName = filteringQueryParam?.globalSearchParamName ?? 'search'
 
   const [sorting, setSorting] = useState<SortingState>(() => {
-    if (!sortingQueryParamEnabled || !sortingQueryParamName || typeof window === 'undefined') {
+    if (!sortingQueryParamEnabled || typeof window === 'undefined') {
       return initialState?.sorting ?? []
     }
 
     const urlSorting = parseSortingFromUrl(window.location.search, sortingQueryParamName)
     return urlSorting.length > 0 ? urlSorting : (initialState?.sorting ?? [])
   })
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState<string>(() => {
+    const initialSearchValue = typeof initialState?.globalFilter === 'string' ? initialState.globalFilter : ''
+
+    if (!filteringQueryParamEnabled || typeof window === 'undefined') {
+      return initialSearchValue
+    }
+
+    return parseSearchFromUrl(window.location.search, globalSearchQueryParamName) ?? initialSearchValue
+  })
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(() => {
+    const initialColumnFilters = initialState?.columnFilters ?? []
+
+    if (!filteringQueryParamEnabled || typeof window === 'undefined') {
+      return initialColumnFilters
+    }
+
+    const urlFilters = parseColumnFiltersFromUrl(window.location.search, filteringQueryParamName)
+    return urlFilters.length > 0 ? urlFilters : initialColumnFilters
+  })
   const [rowSelection, setRowSelection] = useState({})
 
   const baseColumns = columns ?? generateColumns(data)
@@ -63,15 +86,33 @@ export function PromptTable<T extends WithId>({
   }
 
   useEffect(() => {
-    if (!sortingQueryParamEnabled || !sortingQueryParamName || typeof window === 'undefined') return
+    if ((!sortingQueryParamEnabled && !filteringQueryParamEnabled) || typeof window === 'undefined') return
 
     const url = new URL(window.location.href)
-    const serializedSorting = serializeSortingForUrl(sorting)
 
-    if (serializedSorting) {
-      url.searchParams.set(sortingQueryParamName, serializedSorting)
-    } else {
-      url.searchParams.delete(sortingQueryParamName)
+    if (sortingQueryParamEnabled) {
+      const serializedSorting = serializeSortingForUrl(sorting)
+
+      if (serializedSorting) {
+        url.searchParams.set(sortingQueryParamName, serializedSorting)
+      } else {
+        url.searchParams.delete(sortingQueryParamName)
+      }
+    }
+
+    if (filteringQueryParamEnabled) {
+      const serializedFilters = serializeColumnFiltersForUrl(columnFilters)
+      if (serializedFilters) {
+        url.searchParams.set(filteringQueryParamName, serializedFilters)
+      } else {
+        url.searchParams.delete(filteringQueryParamName)
+      }
+
+      if (search.trim()) {
+        url.searchParams.set(globalSearchQueryParamName, search)
+      } else {
+        url.searchParams.delete(globalSearchQueryParamName)
+      }
     }
 
     const nextUrl = `${url.pathname}${url.search}${url.hash}`
@@ -80,7 +121,16 @@ export function PromptTable<T extends WithId>({
     if (nextUrl !== currentUrl) {
       window.history.replaceState(window.history.state, '', nextUrl)
     }
-  }, [sorting, sortingQueryParamEnabled, sortingQueryParamName])
+  }, [
+    sorting,
+    columnFilters,
+    search,
+    sortingQueryParamEnabled,
+    sortingQueryParamName,
+    filteringQueryParamEnabled,
+    filteringQueryParamName,
+    globalSearchQueryParamName,
+  ])
 
   const table = useReactTable({
     data: data,
@@ -88,11 +138,13 @@ export function PromptTable<T extends WithId>({
     state: {
       sorting,
       globalFilter: search,
+      columnFilters,
       rowSelection,
     },
     initialState,
     onSortingChange: handleSortingChange,
     onGlobalFilterChange: setSearch,
+    onColumnFiltersChange: setColumnFilters,
     onRowSelectionChange: setRowSelection,
     enableRowSelection: true,
     getRowId: (row) => row.id!,
@@ -158,4 +210,38 @@ function serializeSortingForUrl(sorting: SortingState): string | null {
   return sorting
     .map(({ id, desc }) => `${encodeURIComponent(id)}:${desc ? 'desc' : 'asc'}`)
     .join(',')
+}
+
+function parseColumnFiltersFromUrl(search: string, paramName: string): ColumnFiltersState {
+  const serializedFilters = new URLSearchParams(search).get(paramName)
+  if (!serializedFilters) return []
+
+  try {
+    const parsed = JSON.parse(serializedFilters)
+    if (!Array.isArray(parsed)) return []
+
+    return parsed
+      .map((filter) => {
+        if (!filter || typeof filter !== 'object') return null
+        if (!('id' in filter) || typeof filter.id !== 'string') return null
+        if (!('value' in filter)) return null
+
+        return {
+          id: filter.id,
+          value: filter.value,
+        }
+      })
+      .filter((entry): entry is ColumnFiltersState[number] => entry !== null)
+  } catch {
+    return []
+  }
+}
+
+function serializeColumnFiltersForUrl(columnFilters: ColumnFiltersState): string | null {
+  if (columnFilters.length === 0) return null
+  return JSON.stringify(columnFilters)
+}
+
+function parseSearchFromUrl(search: string, paramName: string): string | null {
+  return new URLSearchParams(search).get(paramName)
 }

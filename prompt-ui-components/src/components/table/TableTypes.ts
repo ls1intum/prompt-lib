@@ -53,4 +53,9 @@ export interface TableProps<Type extends WithId> {
     enabled?: boolean
     paramName?: string
   }
+  filteringQueryParam?: {
+    enabled?: boolean
+    paramName?: string
+    globalSearchParamName?: string
+  }
 }
