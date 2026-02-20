@@ -3,10 +3,11 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  OnChangeFn,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
-import { ReactElement, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { Table } from '../ui'
 import { checkboxColumn } from './columnDefs/selectColumn'
 import { actionColumn } from './columnDefs/actionColumn'
@@ -29,8 +30,19 @@ export function PromptTable<T extends WithId>({
   filters,
   onRowClick,
   initialState,
+  sortingQueryParam,
 }: TableProps<T>): ReactElement {
-  const [sorting, setSorting] = useState<SortingState>(initialState?.sorting ?? [])
+  const sortingQueryParamName = sortingQueryParam?.paramName ?? 'sort'
+  const sortingQueryParamEnabled = sortingQueryParam?.enabled ?? true
+
+  const [sorting, setSorting] = useState<SortingState>(() => {
+    if (!sortingQueryParamEnabled || typeof window === 'undefined') {
+      return initialState?.sorting ?? []
+    }
+
+    const urlSorting = parseSortingFromUrl(window.location.search, sortingQueryParamName)
+    return urlSorting.length > 0 ? urlSorting : (initialState?.sorting ?? [])
+  })
   const [search, setSearch] = useState('')
   const [rowSelection, setRowSelection] = useState({})
 
@@ -44,6 +56,32 @@ export function PromptTable<T extends WithId>({
     ...(actions ? [actionColumn<T>(actions)] : []),
   ]
 
+  const handleSortingChange: OnChangeFn<SortingState> = (updaterOrValue) => {
+    setSorting((currentSorting) =>
+      typeof updaterOrValue === 'function' ? updaterOrValue(currentSorting) : updaterOrValue
+    )
+  }
+
+  useEffect(() => {
+    if (!sortingQueryParamEnabled || typeof window === 'undefined') return
+
+    const url = new URL(window.location.href)
+    const serializedSorting = serializeSortingForUrl(sorting)
+
+    if (serializedSorting) {
+      url.searchParams.set(sortingQueryParamName, serializedSorting)
+    } else {
+      url.searchParams.delete(sortingQueryParamName)
+    }
+
+    const nextUrl = `${url.pathname}${url.search}${url.hash}`
+    const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`
+
+    if (nextUrl !== currentUrl) {
+      window.history.replaceState(window.history.state, '', nextUrl)
+    }
+  }, [sorting, sortingQueryParamEnabled, sortingQueryParamName])
+
   const table = useReactTable({
     data: data,
     columns: cols,
@@ -53,7 +91,7 @@ export function PromptTable<T extends WithId>({
       rowSelection,
     },
     initialState,
-    onSortingChange: setSorting,
+    onSortingChange: handleSortingChange,
     onGlobalFilterChange: setSearch,
     onRowSelectionChange: setRowSelection,
     enableRowSelection: true,
@@ -84,4 +122,29 @@ export function PromptTable<T extends WithId>({
       </div>
     </div>
   )
+}
+
+function parseSortingFromUrl(search: string, paramName: string): SortingState {
+  const serializedSorting = new URLSearchParams(search).get(paramName)
+  if (!serializedSorting) return []
+
+  return serializedSorting
+    .split(',')
+    .map((segment) => {
+      const [id, order = 'asc'] = segment.split(':')
+      if (!id) return null
+      if (order !== 'asc' && order !== 'desc') return null
+
+      return {
+        id,
+        desc: order === 'desc',
+      }
+    })
+    .filter((entry): entry is SortingState[number] => entry !== null)
+}
+
+function serializeSortingForUrl(sorting: SortingState): string | null {
+  if (sorting.length === 0) return null
+
+  return sorting.map(({ id, desc }) => `${id}:${desc ? 'desc' : 'asc'}`).join(',')
 }

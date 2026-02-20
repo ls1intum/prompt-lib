@@ -49,4 +49,8 @@ export interface TableProps<Type extends WithId> {
   filters?: TableFilter[]
   onRowClick?: (rowData: Type) => void
   initialState?: InitialTableState
+  sortingQueryParam?: {
+    enabled?: boolean
+    paramName?: string
+  }
 }
