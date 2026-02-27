@@ -4,7 +4,6 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
-  OnChangeFn,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
@@ -24,6 +23,7 @@ import { TableFiltersMenu } from './filters/TableFiltersMenu'
 import { ActiveTableFiltersBar } from './filters/ActiveTableFiltersBar'
 import { addFiltersToColumns } from './filters/applyFiltersToColumns'
 import { TableProps } from './PromptTableTypes'
+import { createChangeHandler } from './util/createChangeHandler'
 
 export function PromptTable<T extends WithId>({
   data,
@@ -52,27 +52,9 @@ export function PromptTable<T extends WithId>({
     ...columnsWithFilterFns,
     ...(actions ? [actionColumn<T>(actions)] : []),
   ]
-
-  const handleSortingChange: OnChangeFn<SortingState> = (updaterOrValue) => {
-    setSorting((current) => {
-      const next = typeof updaterOrValue === 'function' ? updaterOrValue(current) : updaterOrValue
-      onSortingChange?.(next)
-      return next
-    })
-  }
-
-  const handleSearchChange = (value: string) => {
-    setSearch(value)
-    onSearchChange?.(value)
-  }
-
-  const handleColumnFiltersChange: OnChangeFn<ColumnFiltersState> = (updaterOrValue) => {
-    setColumnFilters((current) => {
-      const next = typeof updaterOrValue === 'function' ? updaterOrValue(current) : updaterOrValue
-      onColumnFiltersChange?.(next)
-      return next
-    })
-  }
+  const handleSortingChange = createChangeHandler(setSorting, onSortingChange)
+  const handleSearchChange = createChangeHandler(setSearch, onSearchChange)
+  const handleColumnFiltersChange = createChangeHandler(setColumnFilters, onColumnFiltersChange)
 
   const table = useReactTable({
     data: data,

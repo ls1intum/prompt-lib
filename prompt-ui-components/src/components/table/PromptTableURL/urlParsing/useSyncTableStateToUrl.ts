@@ -22,8 +22,7 @@ export function useSyncTableStateToUrl({
   globalSearchQueryParamName: string
 }): void {
   useEffect(() => {
-    if ((!sortingQueryParamEnabled && !filteringQueryParamEnabled) || typeof window === 'undefined')
-      return
+    if (typeof window === 'undefined') return
 
     const url = new URL(window.location.href)
 
@@ -34,6 +33,8 @@ export function useSyncTableStateToUrl({
       } else {
         url.searchParams.delete(sortingQueryParamName)
       }
+    } else {
+      url.searchParams.delete(sortingQueryParamName)
     }
 
     if (filteringQueryParamEnabled) {
@@ -49,6 +50,9 @@ export function useSyncTableStateToUrl({
       } else {
         url.searchParams.delete(globalSearchQueryParamName)
       }
+    } else {
+      url.searchParams.delete(filteringQueryParamName)
+      url.searchParams.delete(globalSearchQueryParamName)
     }
 
     const nextUrl = `${url.pathname}${url.search}${url.hash}`
