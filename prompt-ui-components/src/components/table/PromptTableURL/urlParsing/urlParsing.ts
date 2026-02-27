@@ -1,5 +1,5 @@
 import { ColumnFiltersState, SortingState } from '@tanstack/react-table'
-import { TableFilter } from '../TableTypes'
+import { TableFilter } from '../../PromptTable/PromptTableTypes'
 
 export function parseSortingFromUrl(search: string, paramName: string): SortingState {
   const serializedSorting = new URLSearchParams(search).get(paramName)

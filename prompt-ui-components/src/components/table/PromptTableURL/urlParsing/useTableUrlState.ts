@@ -1,6 +1,6 @@
 import { ColumnFiltersState, InitialTableState, SortingState } from '@tanstack/react-table'
 import { useState } from 'react'
-import { TableFilter } from '../TableTypes'
+import { TableFilter } from '../../PromptTable/PromptTableTypes'
 import { parseColumnFiltersFromUrl, parseSearchFromUrl, parseSortingFromUrl } from './urlParsing'
 
 export function useTableUrlState({
@@ -37,7 +37,9 @@ export function useTableUrlState({
       return initialSearchValue
     }
 
-    return parseSearchFromUrl(window.location.search, globalSearchQueryParamName) ?? initialSearchValue
+    return (
+      parseSearchFromUrl(window.location.search, globalSearchQueryParamName) ?? initialSearchValue
+    )
   })
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(() => {

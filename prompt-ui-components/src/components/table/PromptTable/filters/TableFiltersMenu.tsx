@@ -1,6 +1,6 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Button } from '@/components/ui'
 import { Table } from '@tanstack/react-table'
-import { TableFilter } from '../TableTypes'
+import { TableFilter } from '../PromptTableTypes'
 import { SelectFilterSection } from './SelectFilterSection'
 import { NumericRangeFilterSection } from './NumericRangeFilterSection'
 import { Filter } from 'lucide-react'

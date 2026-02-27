@@ -1,5 +1,5 @@
 import { flexRender, HeaderGroup, Table as ReactTable } from '@tanstack/react-table'
-import { TableHead, TableHeader, TableRow } from '../../ui'
+import { TableHead, TableHeader, TableRow } from '../../../ui'
 import { ReactElement } from 'react'
 import { SortableHeader } from './SortableHeader'
 

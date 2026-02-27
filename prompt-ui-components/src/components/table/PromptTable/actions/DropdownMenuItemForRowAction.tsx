@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { DropdownMenuItem } from '@/components/ui'
-import { RowAction, WithId } from '../TableTypes'
+import { RowAction, WithId } from '../PromptTableTypes'
 
 interface DropdownMenuItemForRowActionProps<Type extends WithId> {
   action: RowAction<Type>

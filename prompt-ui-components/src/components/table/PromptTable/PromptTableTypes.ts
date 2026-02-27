@@ -1,4 +1,23 @@
-import { Column, ColumnDef, InitialTableState, Table } from '@tanstack/react-table'
+import {
+  Column,
+  Table,
+  ColumnDef,
+  ColumnFiltersState,
+  InitialTableState,
+  SortingState,
+} from '@tanstack/react-table'
+
+export interface TableProps<T extends WithId> {
+  data: T[]
+  actions?: RowAction<T>[]
+  columns?: ColumnDef<T>[]
+  filters?: TableFilter[]
+  onRowClick?: (rowData: T) => void
+  initialState?: InitialTableState
+  onSortingChange?: (sorting: SortingState) => void
+  onSearchChange?: (search: string) => void
+  onColumnFiltersChange?: (columnFilters: ColumnFiltersState) => void
+}
 
 export interface WithId {
   id: string
@@ -41,21 +60,3 @@ export type TableFilter =
       type: 'custom'
       render: (args: { column: Column<any, unknown>; table: Table<any> }) => React.ReactNode
     })
-
-export interface TableProps<Type extends WithId> {
-  data: Type[]
-  actions?: RowAction<Type>[]
-  columns?: ColumnDef<Type>[]
-  filters?: TableFilter[]
-  onRowClick?: (rowData: Type) => void
-  initialState?: InitialTableState
-  sortingQueryParam?: {
-    enabled?: boolean
-    paramName?: string
-  }
-  filteringQueryParam?: {
-    enabled?: boolean
-    paramName?: string
-    globalSearchParamName?: string
-  }
-}

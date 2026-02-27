@@ -1,5 +1,6 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
@@ -8,22 +9,21 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { ReactElement, useState } from 'react'
-import { Table } from '../ui'
-import { checkboxColumn } from './columnDefs/selectColumn'
-import { actionColumn } from './columnDefs/actionColumn'
+import { Table } from '../../ui'
+import { checkboxColumn } from './columns/columnDefs/selectColumn'
+import { actionColumn } from './columns/columnDefs/actionColumn'
 import { TableSearch } from './tableBarComponents/TableSearch'
 import { TableActionsButton } from './tableBarComponents/TableActionsButton'
 import { TableInfoText } from './tableBarComponents/TableInfoText'
 import { TableHeaders } from './tableComponents/TableHeaders'
 import { TableRows } from './tableComponents/TableRows'
-import { TableProps, WithId } from './TableTypes'
+import { WithId } from './PromptTableTypes'
 import { TableColumnVisibilityButton } from './tableBarComponents/TableColumnVisibilityButton'
-import { generateColumns } from './generateColumns'
+import { generateColumns } from './columns/generateColumns'
 import { TableFiltersMenu } from './filters/TableFiltersMenu'
 import { ActiveTableFiltersBar } from './filters/ActiveTableFiltersBar'
 import { addFiltersToColumns } from './filters/applyFiltersToColumns'
-import { useTableUrlState } from './urlParsing/useTableUrlState'
-import { useSyncTableStateToUrl } from './urlParsing/useSyncTableStateToUrl'
+import { TableProps } from './PromptTableTypes'
 
 export function PromptTable<T extends WithId>({
   data,
@@ -32,25 +32,17 @@ export function PromptTable<T extends WithId>({
   filters,
   onRowClick,
   initialState,
-  sortingQueryParam,
-  filteringQueryParam,
+  onSortingChange,
+  onSearchChange,
+  onColumnFiltersChange,
 }: TableProps<T>): ReactElement {
-  const sortingQueryParamEnabled = sortingQueryParam?.enabled ?? true
-  const sortingQueryParamName = sortingQueryParam?.paramName ?? 'sorting'
-  const filteringQueryParamEnabled = filteringQueryParam?.enabled ?? true
-  const filteringQueryParamName = filteringQueryParam?.paramName ?? 'filters'
-  const globalSearchQueryParamName = filteringQueryParam?.globalSearchParamName ?? 'search'
-
-  const { sorting, setSorting, search, setSearch, columnFilters, setColumnFilters } =
-    useTableUrlState({
-      initialState,
-      filters,
-      sortingQueryParamEnabled,
-      sortingQueryParamName,
-      filteringQueryParamEnabled,
-      filteringQueryParamName,
-      globalSearchQueryParamName,
-    })
+  const [sorting, setSorting] = useState<SortingState>(initialState?.sorting ?? [])
+  const [search, setSearch] = useState<string>(
+    typeof initialState?.globalFilter === 'string' ? initialState.globalFilter : '',
+  )
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
+    initialState?.columnFilters ?? [],
+  )
   const [rowSelection, setRowSelection] = useState({})
 
   const baseColumns = columns ?? generateColumns(data)
@@ -62,21 +54,25 @@ export function PromptTable<T extends WithId>({
   ]
 
   const handleSortingChange: OnChangeFn<SortingState> = (updaterOrValue) => {
-    setSorting((currentSorting) =>
-      typeof updaterOrValue === 'function' ? updaterOrValue(currentSorting) : updaterOrValue,
-    )
+    setSorting((current) => {
+      const next = typeof updaterOrValue === 'function' ? updaterOrValue(current) : updaterOrValue
+      onSortingChange?.(next)
+      return next
+    })
   }
 
-  useSyncTableStateToUrl({
-    sorting,
-    columnFilters,
-    search,
-    sortingQueryParamEnabled,
-    sortingQueryParamName,
-    filteringQueryParamEnabled,
-    filteringQueryParamName,
-    globalSearchQueryParamName,
-  })
+  const handleSearchChange = (value: string) => {
+    setSearch(value)
+    onSearchChange?.(value)
+  }
+
+  const handleColumnFiltersChange: OnChangeFn<ColumnFiltersState> = (updaterOrValue) => {
+    setColumnFilters((current) => {
+      const next = typeof updaterOrValue === 'function' ? updaterOrValue(current) : updaterOrValue
+      onColumnFiltersChange?.(next)
+      return next
+    })
+  }
 
   const table = useReactTable({
     data: data,
@@ -89,8 +85,8 @@ export function PromptTable<T extends WithId>({
     },
     initialState,
     onSortingChange: handleSortingChange,
-    onGlobalFilterChange: setSearch,
-    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: handleSearchChange,
+    onColumnFiltersChange: handleColumnFiltersChange,
     onRowSelectionChange: setRowSelection,
     enableRowSelection: true,
     getRowId: (row) => row.id!,
@@ -102,7 +98,7 @@ export function PromptTable<T extends WithId>({
   return (
     <div className='flex flex-col gap-3 w-full'>
       <div className='flex items-center justify-between gap-3 flex-wrap'>
-        <TableSearch value={search} onChange={(e) => setSearch(e.target.value)} />
+        <TableSearch value={search} onChange={(e) => handleSearchChange(e.target.value)} />
         {filters && <TableFiltersMenu table={table} filters={filters} />}
         <TableColumnVisibilityButton table={table} />
         {actions && <TableActionsButton table={table} actions={actions} />}

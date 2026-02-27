@@ -3,7 +3,7 @@ import { Table as ReactTable } from '@tanstack/react-table'
 import { MoreHorizontal } from 'lucide-react'
 import { ReactElement } from 'react'
 import { ActionsMenu } from '../actions/ActionsMenu'
-import { RowAction, WithId } from '../TableTypes'
+import { RowAction, WithId } from '../PromptTableTypes'
 
 interface TableActionsButtonProps<TData extends WithId> {
   actions: RowAction<TData>[]
