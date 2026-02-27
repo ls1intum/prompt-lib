@@ -5,14 +5,14 @@ export function createChangeHandler<T>(
   externalOnChange?: (value: T) => void,
 ): OnChangeFn<T> {
   return (updaterOrValue) => {
+    let resolvedNext: T
     setState((current) => {
-      const next =
+      resolvedNext =
         typeof updaterOrValue === 'function'
           ? (updaterOrValue as (old: T) => T)(current)
           : updaterOrValue
-
-      externalOnChange?.(next)
-      return next
+      return resolvedNext
     })
+    externalOnChange?.(resolvedNext!)
   }
 }
