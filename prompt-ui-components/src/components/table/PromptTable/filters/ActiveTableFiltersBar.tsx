@@ -1,4 +1,4 @@
-import { TableFilter } from '../TableTypes'
+import { TableFilter } from '../PromptTableTypes'
 import { Table } from '@tanstack/react-table'
 import { FilterBadge } from './FilterBadge'
 import { tableFilterTypeDisplayFunction } from './filterbadgeFns'

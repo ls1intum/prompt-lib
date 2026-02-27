@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { RowAction } from '../TableTypes'
-import { ActionsMenu } from '../actions/ActionsMenu'
+import { RowAction } from '../../PromptTableTypes'
+import { ActionsMenu } from '../../actions/ActionsMenu'
 import { MoreHorizontal } from 'lucide-react'
 
 export const actionColumn = <T extends { id: string }>(actions: RowAction<T>[]): ColumnDef<T> => ({

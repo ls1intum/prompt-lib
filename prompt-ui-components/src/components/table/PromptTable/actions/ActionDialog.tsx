@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from '@/components/ui'
 import { ReactElement } from 'react'
-import { RowAction, WithId } from '../TableTypes'
+import { RowAction, WithId } from '../PromptTableTypes'
 
 interface ActionDialogProps<T extends WithId> {
   action: RowAction<T>

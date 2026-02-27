@@ -1,5 +1,5 @@
 import { ReactElement, useState } from 'react'
-import { RowAction, WithId } from '../TableTypes'
+import { RowAction, WithId } from '../PromptTableTypes'
 import {
   DropdownMenu,
   DropdownMenuContent,

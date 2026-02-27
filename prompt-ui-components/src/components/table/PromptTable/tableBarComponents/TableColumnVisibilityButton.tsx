@@ -1,6 +1,6 @@
 import { Table } from '@tanstack/react-table'
 import { Columns } from 'lucide-react'
-import { WithId } from '../TableTypes'
+import { WithId } from '../PromptTableTypes'
 import {
   Button,
   DropdownMenu,
