@@ -1,7 +1,14 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
 import { Table as ReactTable } from '@tanstack/react-table'
 import { ReactElement } from 'react'
-import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui'
+import {
+  Button,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui'
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100]
 
@@ -36,12 +43,13 @@ export function TablePagination<TData>({ table }: TablePaginationProps<TData>): 
 
       <div className='flex items-center gap-1.5'>
         <span>
-          Page {pageIndex + 1} of {pageCount}
+          Page {pageCount > 0 ? pageIndex + 1 : 0} of {pageCount}
         </span>
         <Button
           variant='ghost'
           size='icon'
           className='h-7 w-7'
+          aria-label='Go to first page'
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -51,6 +59,7 @@ export function TablePagination<TData>({ table }: TablePaginationProps<TData>): 
           variant='ghost'
           size='icon'
           className='h-7 w-7'
+          aria-label='Go to previous page'
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -60,6 +69,7 @@ export function TablePagination<TData>({ table }: TablePaginationProps<TData>): 
           variant='ghost'
           size='icon'
           className='h-7 w-7'
+          aria-label='Go to next page'
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
@@ -69,6 +79,7 @@ export function TablePagination<TData>({ table }: TablePaginationProps<TData>): 
           variant='ghost'
           size='icon'
           className='h-7 w-7'
+          aria-label='Go to last page'
           onClick={() => table.lastPage()}
           disabled={!table.getCanNextPage()}
         >
