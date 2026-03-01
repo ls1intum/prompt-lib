@@ -3,7 +3,9 @@ import {
   ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
+  PaginationState,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
@@ -14,13 +16,11 @@ import { actionColumn } from './columns/columnDefs/actionColumn'
 import { TableSearch } from './tableBarComponents/TableSearch'
 import { TableActionsButton } from './tableBarComponents/TableActionsButton'
 import { TableInfoText } from './tableBarComponents/TableInfoText'
+import { TablePagination } from './tableBarComponents/TablePagination'
 import { TableHeaders } from './tableComponents/TableHeaders'
 import { TableRows } from './tableComponents/TableRows'
 import { WithId } from './PromptTableTypes'
-import { TableColumnVisibilityButton } from './tableBarComponents/TableColumnVisibilityButton'
 import { generateColumns } from './columns/generateColumns'
-import { TableFiltersMenu } from './filters/TableFiltersMenu'
-import { ActiveTableFiltersBar } from './filters/ActiveTableFiltersBar'
 import { addFiltersToColumns } from './filters/applyFiltersToColumns'
 import { TableProps } from './PromptTableTypes'
 import { createChangeHandler } from './util/createChangeHandler'
@@ -35,6 +35,7 @@ export function PromptTable<T extends WithId>({
   onSortingChange,
   onSearchChange,
   onColumnFiltersChange,
+  pageSize: initialPageSize = 20,
 }: TableProps<T>): ReactElement {
   const [sorting, setSorting] = useState<SortingState>(initialState?.sorting ?? [])
   const [search, setSearch] = useState<string>(
@@ -44,6 +45,10 @@ export function PromptTable<T extends WithId>({
     initialState?.columnFilters ?? [],
   )
   const [rowSelection, setRowSelection] = useState({})
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: initialPageSize,
+  })
 
   const baseColumns = columns ?? generateColumns(data)
   const columnsWithFilterFns = addFiltersToColumns(baseColumns, filters)
@@ -64,31 +69,31 @@ export function PromptTable<T extends WithId>({
       globalFilter: search,
       columnFilters,
       rowSelection,
+      pagination,
     },
     initialState,
     onSortingChange: handleSortingChange,
     onGlobalFilterChange: handleSearchChange,
     onColumnFiltersChange: handleColumnFiltersChange,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
+    autoResetPageIndex: true,
     enableRowSelection: true,
     getRowId: (row) => row.id!,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
     <div className='flex flex-col gap-3 w-full'>
-      <div className='flex items-center justify-between gap-3 flex-wrap'>
-        <TableSearch value={search} onChange={(e) => handleSearchChange(e.target.value)} />
-        {filters && <TableFiltersMenu table={table} filters={filters} />}
-        <TableColumnVisibilityButton table={table} />
+      <div className='flex items-center gap-2 justify-between'>
+        <TableSearch value={search} onChange={handleSearchChange} table={table} filters={filters} />
         {actions && <TableActionsButton table={table} actions={actions} />}
       </div>
 
-      <ActiveTableFiltersBar table={table} filters={filters} />
-
-      <TableInfoText table={table} />
+      <TableInfoText table={table} filters={filters} />
 
       <div className='rounded-md border overflow-x-auto w-full'>
         <Table className='table-auto w-full relative'>
@@ -96,6 +101,8 @@ export function PromptTable<T extends WithId>({
           <TableRows table={table} onRowClick={onRowClick} />
         </Table>
       </div>
+
+      <TablePagination table={table} />
     </div>
   )
 }
