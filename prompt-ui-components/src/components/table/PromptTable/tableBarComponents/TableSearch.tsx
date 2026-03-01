@@ -46,7 +46,13 @@ export function TableSearch({ value, onChange, table, filters }: TableSearchProp
             table={table}
             filters={filters}
             trigger={
-              <button className='flex items-center gap-1.5 shrink-0 border-l border-input px-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors outline-none'>
+              <button
+                type='button'
+                className={
+                  'flex items-center gap-1.5 shrink-0 border-l ' +
+                  'border-input px-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors outline-none'
+                }
+              >
                 <Filter className='h-4 w-4' />
                 <span className='hidden sm:inline'>Filter</span>
               </button>
