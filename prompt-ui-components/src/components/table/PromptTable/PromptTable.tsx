@@ -3,7 +3,9 @@ import {
   ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
+  PaginationState,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
@@ -14,6 +16,7 @@ import { actionColumn } from './columns/columnDefs/actionColumn'
 import { TableSearch } from './tableBarComponents/TableSearch'
 import { TableActionsButton } from './tableBarComponents/TableActionsButton'
 import { TableInfoText } from './tableBarComponents/TableInfoText'
+import { TablePagination } from './tableBarComponents/TablePagination'
 import { TableHeaders } from './tableComponents/TableHeaders'
 import { TableRows } from './tableComponents/TableRows'
 import { WithId } from './PromptTableTypes'
@@ -32,6 +35,7 @@ export function PromptTable<T extends WithId>({
   onSortingChange,
   onSearchChange,
   onColumnFiltersChange,
+  pageSize: initialPageSize = 20,
 }: TableProps<T>): ReactElement {
   const [sorting, setSorting] = useState<SortingState>(initialState?.sorting ?? [])
   const [search, setSearch] = useState<string>(
@@ -41,6 +45,10 @@ export function PromptTable<T extends WithId>({
     initialState?.columnFilters ?? [],
   )
   const [rowSelection, setRowSelection] = useState({})
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: initialPageSize,
+  })
 
   const baseColumns = columns ?? generateColumns(data)
   const columnsWithFilterFns = addFiltersToColumns(baseColumns, filters)
@@ -61,17 +69,21 @@ export function PromptTable<T extends WithId>({
       globalFilter: search,
       columnFilters,
       rowSelection,
+      pagination,
     },
     initialState,
     onSortingChange: handleSortingChange,
     onGlobalFilterChange: handleSearchChange,
     onColumnFiltersChange: handleColumnFiltersChange,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
+    autoResetPageIndex: true,
     enableRowSelection: true,
     getRowId: (row) => row.id!,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
@@ -89,6 +101,8 @@ export function PromptTable<T extends WithId>({
           <TableRows table={table} onRowClick={onRowClick} />
         </Table>
       </div>
+
+      <TablePagination table={table} />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui'
 import { Filter, SearchIcon } from 'lucide-react'
-import { KeyboardEvent, ReactElement, useEffect, useState } from 'react'
+import { KeyboardEvent, ReactElement, useEffect, useRef, useState } from 'react'
 import { Table as ReactTable } from '@tanstack/react-table'
 import { TableFilter } from '../PromptTableTypes'
 import { TableFiltersMenu } from '../filters/TableFiltersMenu'
@@ -14,17 +14,22 @@ interface TableSearchProps {
 
 export function TableSearch({ value, onChange, table, filters }: TableSearchProps): ReactElement {
   const [inputValue, setInputValue] = useState(value)
+  const skipNextSync = useRef(false)
 
   useEffect(() => {
+    if (skipNextSync.current) {
+      skipNextSync.current = false
+      return
+    }
     setInputValue(value)
   }, [value])
-
-  const commit = () => onChange(inputValue)
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       e.preventDefault()
-      commit()
+      onChange(inputValue)
+      skipNextSync.current = true
+      setInputValue('')
     }
   }
 
