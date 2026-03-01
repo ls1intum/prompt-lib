@@ -22,7 +22,10 @@ export function TableSearch({ value, onChange, table, filters }: TableSearchProp
   const commit = () => onChange(inputValue)
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') commit()
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+      e.preventDefault()
+      commit()
+    }
   }
 
   const showFilter = filters && filters.length > 0 && table
@@ -48,6 +51,7 @@ export function TableSearch({ value, onChange, table, filters }: TableSearchProp
             trigger={
               <button
                 type='button'
+                aria-label='Filter'
                 className={
                   'flex items-center gap-1.5 shrink-0 border-l ' +
                   'border-input px-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors outline-none'
