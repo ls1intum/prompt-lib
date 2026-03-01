@@ -37,7 +37,7 @@ export function TableSearch({ value, onChange, table, filters }: TableSearchProp
 
   return (
     <div className='relative flex-1 min-w-0 h-full'>
-      <div className='flex h-9 rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden h-full'>
+      <div className='flex rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden h-full'>
         <div className='relative flex-1 min-w-0'>
           <Input
             placeholder='Search ... (press Enter)'
