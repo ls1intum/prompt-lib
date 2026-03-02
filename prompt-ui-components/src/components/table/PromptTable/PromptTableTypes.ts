@@ -17,6 +17,7 @@ export interface TableProps<T extends WithId> {
   onSortingChange?: (sorting: SortingState) => void
   onSearchChange?: (search: string) => void
   onColumnFiltersChange?: (columnFilters: ColumnFiltersState) => void
+  pageSize?: number
 }
 
 export interface WithId {

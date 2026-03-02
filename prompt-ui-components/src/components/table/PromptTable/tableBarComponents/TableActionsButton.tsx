@@ -23,7 +23,7 @@ export function TableActionsButton<TData extends WithId>({
       triggerComponent={
         <Button disabled={selectedCount == 0}>
           <MoreHorizontal className='h-4 w-4' />
-          Actions
+          <span className='hidden sm:inline'>Actions</span>
         </Button>
       }
     />

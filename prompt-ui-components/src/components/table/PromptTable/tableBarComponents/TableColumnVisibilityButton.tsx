@@ -21,7 +21,7 @@ export function TableColumnVisibilityButton<Type extends WithId>({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='outline'>
-          <Columns className='mr-2 h-4 w-4' />
+          <Columns className='h-4 w-4' />
           Columns
         </Button>
       </DropdownMenuTrigger>
