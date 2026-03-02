@@ -2406,7 +2406,7 @@ __metadata:
     eslint: "npm:^9.39.3"
     eslint-plugin-prettier: "npm:^5.5.5"
     eslint-plugin-react: "npm:^7.37.5"
-    eslint-plugin-react-hooks: "npm:^5.1.0"
+    eslint-plugin-react-hooks: "npm:^5.2.0"
     highlight.js: "npm:^11.11.1"
     lowlight: "npm:^3.3.0"
     lucide-react: "npm:^0.575.0"
@@ -3725,7 +3725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^5.1.0":
+"eslint-plugin-react-hooks@npm:^5.2.0":
   version: 5.2.0
   resolution: "eslint-plugin-react-hooks@npm:5.2.0"
   peerDependencies:
