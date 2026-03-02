@@ -628,7 +628,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/compat@npm:^1.2.5":
+"@eslint/compat@npm:^1.4.1":
   version: 1.4.1
   resolution: "@eslint/compat@npm:1.4.1"
   dependencies:
@@ -750,7 +750,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/resolvers@npm:^3.9.1":
+"@hookform/resolvers@npm:^3.10.0":
   version: 3.10.0
   resolution: "@hookform/resolvers@npm:3.10.0"
   peerDependencies:
@@ -2357,8 +2357,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tumaet/prompt-ui-components@workspace:."
   dependencies:
-    "@eslint/compat": "npm:^1.2.5"
-    "@hookform/resolvers": "npm:^3.9.1"
+    "@eslint/compat": "npm:^1.4.1"
+    "@hookform/resolvers": "npm:^3.10.0"
     "@radix-ui/react-accordion": "npm:^1.2.12"
     "@radix-ui/react-alert-dialog": "npm:^1.1.15"
     "@radix-ui/react-avatar": "npm:^1.1.11"
@@ -2409,7 +2409,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^5.2.0"
     highlight.js: "npm:^11.11.1"
     lowlight: "npm:^3.3.0"
-    lucide-react: "npm:^0.575.0"
+    lucide-react: "npm:^0.576.0"
     postcss: "npm:^8.5.6"
     postcss-cli: "npm:^10.1.0"
     postcss-preset-env: "npm:^10.6.1"
@@ -2424,7 +2424,7 @@ __metadata:
     sonner: "npm:^2.0.7"
     tailwind-merge: "npm:^2.6.1"
     tsc-alias: "npm:^1.8.16"
-    typescript: "npm:^5.7.3"
+    typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft
 
@@ -4860,12 +4860,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.575.0":
-  version: 0.575.0
-  resolution: "lucide-react@npm:0.575.0"
+"lucide-react@npm:^0.576.0":
+  version: 0.576.0
+  resolution: "lucide-react@npm:0.576.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/4f42e81c88f60c8f904b178c0b28e8ac9a99da8ef24eba5f26ed97b63124304a847baea2f71125629a272df58dbb61cd799ff6a7e4878e5a4c28d8a699b84730
+  checksum: 10c0/316301dd4331d99ec6923d5e7e7ec48d57309738fa29b2e993fd4f4f9db73a22e820b9bf586831b2bb48ddbd0a7c56f6a6f130b2a5b718df5301395290b99e90
   languageName: node
   linkType: hard
 
@@ -6943,7 +6943,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.7.3":
+"typescript@npm:^5.9.3":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
   bin:
@@ -6953,7 +6953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.7.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.9.3#optional!builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"
   bin:
