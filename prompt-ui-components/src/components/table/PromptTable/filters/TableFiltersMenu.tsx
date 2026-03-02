@@ -1,5 +1,6 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Button } from '@/components/ui'
 import { Table } from '@tanstack/react-table'
+import { ReactNode } from 'react'
 import { TableFilter } from '../PromptTableTypes'
 import { SelectFilterSection } from './SelectFilterSection'
 import { NumericRangeFilterSection } from './NumericRangeFilterSection'
@@ -8,16 +9,19 @@ import { Filter } from 'lucide-react'
 interface TableFiltersMenuProps {
   table: Table<any>
   filters: TableFilter[]
+  trigger?: ReactNode
 }
 
-export function TableFiltersMenu({ table, filters }: TableFiltersMenuProps) {
+export function TableFiltersMenu({ table, filters, trigger }: TableFiltersMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline' className='justify-start'>
-          <Filter className='mr-2 h-4 w-4' />
-          Filter
-        </Button>
+        {trigger ?? (
+          <Button variant='outline' className='justify-start'>
+            <Filter className='h-4 w-4' />
+            <span className='hidden sm:inline'>Filter</span>
+          </Button>
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className='w-64'>
