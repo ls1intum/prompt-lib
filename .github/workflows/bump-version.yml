@@ -24,17 +24,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Prepare branch name
-        id: branch
+      - name: Check versions match
         run: |
           SHARED_VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
           UI_VERSION=$(node -p "require('./prompt-ui-components/package.json').version")
@@ -46,8 +47,19 @@ jobs:
             exit 1
           fi
 
-          VERSION="$SHARED_VERSION"
+      - name: Bump versions
+        run: |
+          cd prompt-shared-state
+          yarn version ${{ inputs.bump_type }} --no-git-tag-version
+          cd ../prompt-ui-components
+          yarn version ${{ inputs.bump_type }} --no-git-tag-version
+
+      - name: Prepare branch name
+        id: branch
+        run: |
+          VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
           BRANCH="chore/bump-version-$VERSION"
+
           echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
