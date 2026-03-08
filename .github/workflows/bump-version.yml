@@ -57,6 +57,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           branch: ${{ steps.branch.outputs.branch }}
+          base: main
           title: "chore: bump prompt-lib version"
           body: |
             Automated version bump.
