@@ -39,28 +39,21 @@ jobs:
           cd ../prompt-ui-components && yarn version ${{ inputs.bump_type }}
 
       - name: Create branch
+      - name: Prepare branch and commit message
         id: branch
         run: |
           VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
-          RUN_ID=${GITHUB_RUN_ID:-$RANDOM}
-          BRANCH="chore/bump-version-$VERSION-$RUN_ID"
-
-          git checkout -b $BRANCH
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
-          git add prompt-shared-state/package.json
-          git add prompt-ui-components/package.json
-
-          git commit -m "chore: bump prompt-lib version to $VERSION"
-          git push origin $BRANCH
+          BRANCH="chore/bump-version-$VERSION"
+          COMMIT_MESSAGE="chore: bump prompt-lib version to $VERSION"
 
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           branch: ${{ steps.branch.outputs.branch }}
+          commit-message: ${{ steps.branch.outputs.commit_message }}
           base: main
           title: "chore: bump prompt-lib version"
           body: |
