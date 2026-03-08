@@ -42,7 +42,8 @@ jobs:
         id: branch
         run: |
           VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
-          BRANCH="chore/bump-version-$VERSION"
+          RUN_ID=${GITHUB_RUN_ID:-$RANDOM}
+          BRANCH="chore/bump-version-$VERSION-$RUN_ID"
 
           git checkout -b $BRANCH
           git config user.name "github-actions"
