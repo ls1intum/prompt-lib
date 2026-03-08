@@ -30,10 +30,13 @@ jobs:
         with:
           node-version: 18
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Bump versions
         run: |
-          npm version ${{ inputs.bump_type }} --no-git-tag-version --prefix prompt-shared-state
-          npm version ${{ inputs.bump_type }} --no-git-tag-version --prefix prompt-ui-components
+          cd prompt-shared-state && yarn version ${{ inputs.bump_type }}
+          cd ../prompt-ui-components && yarn version ${{ inputs.bump_type }}
 
       - name: Create branch
         id: branch
