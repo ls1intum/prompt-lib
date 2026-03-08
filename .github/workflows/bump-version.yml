@@ -1,0 +1,64 @@
+name: Bump prompt-lib versions
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: "Version bump type"
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Bump versions
+        run: |
+          npm version ${{ inputs.bump_type }} --no-git-tag-version --prefix prompt-shared-state
+          npm version ${{ inputs.bump_type }} --no-git-tag-version --prefix prompt-ui-components
+
+      - name: Create branch
+        id: branch
+        run: |
+          VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
+          BRANCH="chore/bump-version-$VERSION"
+
+          git checkout -b $BRANCH
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add prompt-shared-state/package.json
+          git add prompt-ui-components/package.json
+
+          git commit -m "chore: bump prompt-lib version to $VERSION"
+          git push origin $BRANCH
+
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: ${{ steps.branch.outputs.branch }}
+          title: "chore: bump prompt-lib version"
+          body: |
+            Automated version bump.
+
+            Bump type: **${{ inputs.bump_type }}**
