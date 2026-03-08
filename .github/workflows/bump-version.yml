@@ -33,30 +33,24 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Bump versions
-        run: |
-          cd prompt-shared-state && yarn version ${{ inputs.bump_type }}
-          cd ../prompt-ui-components && yarn version ${{ inputs.bump_type }}
-
-      - name: Create branch
-      - name: Prepare branch and commit message
+      - name: Prepare branch name
         id: branch
         run: |
           VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
           BRANCH="chore/bump-version-$VERSION"
-          COMMIT_MESSAGE="chore: bump prompt-lib version to $VERSION"
-
-          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
-          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           branch: ${{ steps.branch.outputs.branch }}
-          commit-message: ${{ steps.branch.outputs.commit_message }}
-          base: main
-          title: "chore: bump prompt-lib version"
+          commit-message: chore: bump prompt-lib version to ${{ steps.branch.outputs.version }}
+          title: chore: bump prompt-lib version to ${{ steps.branch.outputs.version }}
           body: |
             Automated version bump.
 
             Bump type: **${{ inputs.bump_type }}**
+          add-paths: |
+            prompt-shared-state/package.json
+            prompt-ui-components/package.json
