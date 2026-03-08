@@ -36,7 +36,17 @@ jobs:
       - name: Prepare branch name
         id: branch
         run: |
-          VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
+          SHARED_VERSION=$(node -p "require('./prompt-shared-state/package.json').version")
+          UI_VERSION=$(node -p "require('./prompt-ui-components/package.json').version")
+
+          if [ "$SHARED_VERSION" != "$UI_VERSION" ]; then
+            echo "Error: Version mismatch between packages:"
+            echo "  prompt-shared-state: $SHARED_VERSION"
+            echo "  prompt-ui-components: $UI_VERSION"
+            exit 1
+          fi
+
+          VERSION="$SHARED_VERSION"
           BRANCH="chore/bump-version-$VERSION"
           echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
