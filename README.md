@@ -111,7 +111,7 @@ This repository uses GitHub Actions for automated building and publishing:
 
 ### Build Workflow (`build-packages.yml`)
 
-- **Trigger**: On pull requests to main branch
+- **Trigger**: On all pull requests
 - **Purpose**: Validates that both packages build successfully
 
 ### Publish Workflow (`publish-packages.yml`)
