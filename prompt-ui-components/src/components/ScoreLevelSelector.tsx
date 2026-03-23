@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { LockIcon } from 'lucide-react'
 import { ScoreLevel } from '@tumaet/prompt-shared-state'
 
-import { cn } from '@/lib'
+import { cn } from '@/lib/utils'
 
 import { getLevelConfig } from './getLevelConfig'
 
