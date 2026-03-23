@@ -21,7 +21,7 @@ jobs:
   bump:
     runs-on: ubuntu-latest
     env:
-      NPM_AUTH_TOKEN: '' # Required by Yarn config in prompt-shared-state
+      NPM_AUTH_TOKEN: "" # Required by Yarn config in prompt-shared-state
 
     steps:
       - name: Checkout repository
@@ -32,7 +32,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: '23.x'
+          node-version: "23.x"
 
       - name: Enable Corepack
         run: corepack enable
@@ -69,8 +69,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           branch: ${{ steps.branch.outputs.branch }}
-          commit-message: chore: bump prompt-lib version to ${{ steps.branch.outputs.version }}
-          title: chore: bump prompt-lib version to ${{ steps.branch.outputs.version }}
+          commit-message: "chore: bump prompt-lib version to ${{ steps.branch.outputs.version }}"
+          title: "chore: bump prompt-lib version to ${{ steps.branch.outputs.version }}"
           body: |
             Automated version bump.
 
