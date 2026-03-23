@@ -51,7 +51,7 @@ export const ScoreLevelSelector = ({
               hideUnselectedOnDesktop &&
                 selectedScore !== undefined &&
                 !isSelected &&
-                'hidden lg:flex',
+                'lg:hidden',
             )}
           >
             {levelIndicators.length > 0 && (
