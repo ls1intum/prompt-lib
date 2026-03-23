@@ -20,17 +20,19 @@ permissions:
 jobs:
   bump:
     runs-on: ubuntu-latest
+    env:
+      NPM_AUTH_TOKEN: '' # Required by Yarn config in prompt-shared-state
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: '23.x'
 
       - name: Enable Corepack
         run: corepack enable
@@ -50,9 +52,9 @@ jobs:
       - name: Bump versions
         run: |
           cd prompt-shared-state
-          yarn version ${{ inputs.bump_type }} --no-git-tag-version
+          yarn version ${{ inputs.bump_type }} --immediate
           cd ../prompt-ui-components
-          yarn version ${{ inputs.bump_type }} --no-git-tag-version
+          yarn version ${{ inputs.bump_type }} --immediate
 
       - name: Prepare branch name
         id: branch
