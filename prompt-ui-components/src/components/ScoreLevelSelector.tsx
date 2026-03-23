@@ -76,7 +76,7 @@ export const ScoreLevelSelector = ({
               aria-describedby={descriptionID}
               className={cn(
                 'flex h-full w-full flex-col justify-start rounded-lg border-2 p-3 text-left text-sm transition-all',
-                !isSelected && 'hover:bg-gray-100',
+                !isSelected && 'hover:bg-gray-100 dark:hover:bg-gray-800',
                 isSelected
                   ? cn(config.textColor, config.selectedBg)
                   : 'bg-gray-50 dark:bg-gray-900',
@@ -93,7 +93,7 @@ export const ScoreLevelSelector = ({
                   <span className='flex items-center gap-1'>
                     <LockIcon
                       className={cn(
-                        'line-clamp-3 h-4 w-4 text-muted-foreground',
+                        'h-4 w-4 text-muted-foreground',
                         isSelected && 'dark:text-gray-200',
                       )}
                     />

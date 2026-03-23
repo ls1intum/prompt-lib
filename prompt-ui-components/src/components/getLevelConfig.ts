@@ -7,6 +7,10 @@ export interface ScoreLevelConfig {
   border: string
 }
 
+const assertUnreachable = (value: never): never => {
+  throw new Error(`Unhandled ScoreLevel: ${String(value)}`)
+}
+
 export const getLevelConfig = (level: ScoreLevel, unknown?: boolean): ScoreLevelConfig => {
   const unknownConfig: ScoreLevelConfig = {
     title: 'Unknown',
@@ -55,7 +59,7 @@ export const getLevelConfig = (level: ScoreLevel, unknown?: boolean): ScoreLevel
         selectedBg: 'bg-blue-200 dark:bg-blue-600',
         border: 'border-blue-200 dark:border-blue-200',
       }
+    default:
+      return assertUnreachable(level)
   }
-
-  return unknownConfig
 }
