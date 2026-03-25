@@ -2642,7 +2642,7 @@ __metadata:
     react-router-dom: "npm:^7.13.2"
     recharts: "npm:^3.8.0"
     sonner: "npm:^2.0.7"
-    tailwind-merge: "npm:^2.6.1"
+    tailwind-merge: "npm:^3.5.0"
     tsc-alias: "npm:^1.8.16"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -6958,10 +6958,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "tailwind-merge@npm:2.6.1"
-  checksum: 10c0/f9b5d7ba37f6c6dc7bb7a090f08252e8d827b5abfc1031bf468c5274ce104409e7952a0075a3e009aab53adda8c6d133bc1dd9d3427e2ae5bc00306f9ce1fbff
+"tailwind-merge@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "tailwind-merge@npm:3.5.0"
+  checksum: 10c0/4dc588f5b5296ba3f38e1ebb41f02b6d24a8c5bb45e44b33748c118fb4b5767dd0efc464431ca3e75404056b618b5f67bec3708158baa65fed8a2fc9201e0c53
   languageName: node
   linkType: hard
 
