@@ -1,6 +1,6 @@
 # prompt-ui-components
 
-A shared UI component library for the **AET Prompt2** system, built on [shadcn/ui](https://ui.shadcn.dev/).
+A shared UI component library for the **AET Prompt** system, built on [shadcn/ui](https://ui.shadcn.dev/).
 
 Components are loaded as **Module Federation singletons**, which ensures:
 - A **consistent UI experience** across all microfrontends

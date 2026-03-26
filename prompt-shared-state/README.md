@@ -1,6 +1,6 @@
 # prompt-shared-state
 
-A shared library for the **AET Prompt2** system that provides common TypeScript interfaces and state management (via [Zustand](https://github.com/pmndrs/zustand)) across multiple microfrontends.
+A shared library for the **AET Prompt** system that provides common TypeScript interfaces and state management (via [Zustand](https://github.com/pmndrs/zustand)) across multiple microfrontends.
 
 ## Overview
 

@@ -1,6 +1,6 @@
 # prompt-lib
 
-Shared libraries for the **AET Prompt2** system — an educational platform for managing courses, assessments, and student participation.
+Shared libraries for the **AET Prompt** system — an educational platform for managing courses, assessments, and student participation.
 
 This repository contains two npm packages:
 
