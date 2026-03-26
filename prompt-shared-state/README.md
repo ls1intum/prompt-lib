@@ -55,7 +55,7 @@ function MyComponent() {
 | `setPermissions(permissions)` | `(permissions: string[]) => void` | Set user permissions |
 | `clearPermissions()` | `() => void` | Clear all permissions |
 | `logout(redirectUri?)` | `(redirectUri?: string) => void` | Log out and optionally redirect |
-| `setLogoutFunction(fn)` | `(fn: Function) => void` | Register the logout handler |
+| `setLogoutFunction(fn)` | `(logoutFunction: (redirectUri?: string) => void) => void` | Register the logout handler |
 
 ---
 
@@ -92,7 +92,7 @@ function CourseSelector() {
 | `ownCourseIDs` | `string[]` | IDs of courses the user is enrolled in |
 | `setCourses(courses)` | `(courses: Course[]) => void` | Set the full course list |
 | `setOwnCourseIDs(ids)` | `(ids: string[]) => void` | Set IDs of the user's own courses |
-| `getSelectedCourseID()` | `() => string \| undefined` | Get the currently selected course ID |
+| `getSelectedCourseID()` | `() => string \| null` | Get the currently selected course ID |
 | `setSelectedCourseID(id)` | `(id: string) => void` | Select a course (persisted to localStorage) |
 | `removeSelectedCourseID()` | `() => void` | Clear the selected course |
 | `isStudentOfCourse(id)` | `(id: string) => boolean` | Check if the user is a student in a course |
@@ -149,8 +149,8 @@ const back = mapNumberToScoreLevel(numeric)               // → ScoreLevel
 ```ts
 import { Role } from '@tumaet/prompt-shared-state'
 
-// Values: PROMPT_Admin, PROMPT_Lecturer, Lecturer, Editor, Student
-if (user.role === Role.PROMPT_Admin) {
+// Enum members: PROMPT_ADMIN, PROMPT_LECTURER, COURSE_LECTURER, COURSE_EDITOR, COURSE_STUDENT
+if (user.role === Role.PROMPT_ADMIN) {
   // show admin UI
 }
 ```

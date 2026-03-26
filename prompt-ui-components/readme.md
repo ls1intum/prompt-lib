@@ -86,10 +86,8 @@ import { PromptTable } from '@tumaet/prompt-ui-components'
       id: 'status',
       label: 'Status',
       type: 'select',
-      options: [
-        { label: 'Active', value: 'active' },
-        { label: 'Inactive', value: 'inactive' },
-      ],
+      options: ['active', 'inactive'],
+      optionLabel: (value) => value === 'active' ? 'Active' : 'Inactive',
     },
   ]}
   actions={[
@@ -114,7 +112,7 @@ import { PromptTable } from '@tumaet/prompt-ui-components'
 |---|---|---|
 | `data` | `T[]` | Array of row data objects (must have an `id` field) |
 | `columns` | `ColumnDef<T>[]` | TanStack column definitions (auto-generated if omitted) |
-| `filters` | `TableFilter[]` | Filter configurations (select or numeric range) |
+| `filters` | `TableFilter[]` | Filter configurations (`select`, `numericRange`, or `custom`) |
 | `actions` | `RowAction<T>[]` | Bulk row action buttons |
 | `onRowClick` | `(row: T) => void` | Callback when a row is clicked |
 | `pageSize` | `number` | Rows per page (default: `20`) |

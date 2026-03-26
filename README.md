@@ -46,7 +46,7 @@ corepack enable
 Corepack is included by default with Node.js 16.9+ and 14.19+. If you see an error like:
 
 ```text
-error This project's package.json defines "packageManager": "yarn@4.1.0". However the current global version of Yarn is 1.22.22.
+error This project's package.json defines "packageManager": "yarn@4.13.0". However the current global version of Yarn is 1.22.22.
 ```
 
 Run `corepack enable` to fix it.
