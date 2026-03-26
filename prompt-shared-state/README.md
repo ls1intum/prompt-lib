@@ -29,7 +29,7 @@ npm install @tumaet/prompt-shared-state
 
 Manages authentication state and user permissions.
 
-```ts
+```tsx
 import { useAuthStore } from '@tumaet/prompt-shared-state'
 
 function MyComponent() {
@@ -63,7 +63,7 @@ function MyComponent() {
 
 Manages course data and the currently selected course. Course selection is persisted to localStorage.
 
-```ts
+```tsx
 import { useCourseStore } from '@tumaet/prompt-shared-state'
 
 function CourseSelector() {
@@ -189,16 +189,14 @@ This ensures there is only **one** instance of the shared state library at runti
 
 ## Contributing
 
-As a member of the AET team, contribute changes by opening a pull request. Once merged into `main`, a GitHub Actions workflow automatically bumps the package version and publishes it to npm.
+As a member of the AET team, contribute changes by opening a pull request. Once merged, follow the release process described in the [repository root README](../README.md) to publish a new version.
 
-### Commit Message Keywords
+### Versioning & Publishing
 
-Include one of the following keywords in your commit message to control the version bump:
+Publishing is triggered by creating a **GitHub Release**. The steps are:
 
-| Keyword | Effect | Example |
-|---|---|---|
-| `major` | `1.2.3` → `2.0.0` | Breaking API change |
-| `minor` | `1.2.3` → `1.3.0` | New feature, backwards compatible |
-| _(none)_ / `patch` | `1.2.3` → `1.2.4` | Bug fix or small improvement |
+1. Update the version in both `prompt-shared-state/package.json` and `prompt-ui-components/package.json` to the same value (or run `bump-version` via the manual GitHub Actions workflow).
+2. Create a GitHub Release with the tag `v{version}` (e.g., `v1.2.3`).
+3. The publish workflow automatically validates the version and publishes both packages to npm.
 
-After a successful publish, a PR with the new version number will be opened automatically — merge it immediately.
+See the [root README](../README.md) for full details.

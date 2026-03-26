@@ -193,8 +193,8 @@ function MyForm() {
 - Undo/redo
 
 Variants for specific contexts:
-- `FormDescriptionTiptap` — compact variant for form description fields
-- `MailingTiptap` — variant configured for email content
+- `DescriptionMinimalTiptapEditor` — compact variant for form description fields
+- `MailingTiptapEditor` — variant configured for email content
 
 ---
 
@@ -206,23 +206,23 @@ A calendar-based date picker using a Popover.
 import { DatePicker } from '@tumaet/prompt-ui-components'
 
 <DatePicker
-  value={selectedDate}
-  onChange={setSelectedDate}
+  date={selectedDate}
+  onSelect={setSelectedDate}
 />
 ```
 
 ---
 
-### DateRangePicker
+### DatePickerWithRange
 
 Selects a start and end date.
 
 ```tsx
-import { DateRangePicker } from '@tumaet/prompt-ui-components'
+import { DatePickerWithRange } from '@tumaet/prompt-ui-components'
 
-<DateRangePicker
-  value={dateRange}
-  onChange={setDateRange}
+<DatePickerWithRange
+  date={dateRange}
+  setDate={setDateRange}
 />
 ```
 
@@ -240,26 +240,26 @@ import { MultiSelect } from '@tumaet/prompt-ui-components'
     { label: 'React', value: 'react' },
     { label: 'TypeScript', value: 'ts' },
   ]}
-  value={selected}
-  onChange={setSelected}
+  defaultValue={selected}
+  onValueChange={setSelected}
   placeholder="Select frameworks..."
 />
 ```
 
 ---
 
-### DeleteConfirmationDialog
+### DeleteConfirmation
 
 A confirmation dialog specifically for destructive delete actions.
 
 ```tsx
-import { DeleteConfirmationDialog } from '@tumaet/prompt-ui-components'
+import { DeleteConfirmation } from '@tumaet/prompt-ui-components'
 
-<DeleteConfirmationDialog
-  open={showDialog}
-  onOpenChange={setShowDialog}
-  onConfirm={handleDelete}
-  description="This will permanently delete the course."
+<DeleteConfirmation
+  isOpen={showDialog}
+  setOpen={setShowDialog}
+  onClick={(confirmed) => { if (confirmed) handleDelete() }}
+  deleteMessage="This will permanently delete the course."
 />
 ```
 
@@ -273,9 +273,10 @@ A fixed-position alert bar shown when there are unsaved changes, with Save and R
 import { SaveChangesAlert } from '@tumaet/prompt-ui-components'
 
 <SaveChangesAlert
-  show={isDirty}
-  onSave={handleSave}
-  onRevert={handleRevert}
+  message="You have unsaved changes"
+  saveChanges={handleSave}
+  handleRevert={handleRevert}
+  onClose={handleClose}
 />
 ```
 
@@ -290,8 +291,16 @@ import { ScoreLevelSelector } from '@tumaet/prompt-ui-components'
 import { ScoreLevel } from '@tumaet/prompt-shared-state'
 
 <ScoreLevelSelector
-  value={ScoreLevel.Good}
-  onChange={(level) => setScore(level)}
+  selectedScore={ScoreLevel.Good}
+  onScoreChange={(level) => setScore(level)}
+  completed={false}
+  descriptionsByLevel={{
+    [ScoreLevel.VeryGood]: 'Excellent work',
+    [ScoreLevel.Good]: 'Good work',
+    [ScoreLevel.Ok]: 'Satisfactory',
+    [ScoreLevel.Bad]: 'Needs improvement',
+    [ScoreLevel.VeryBad]: 'Unsatisfactory',
+  }}
 />
 ```
 
@@ -318,10 +327,8 @@ import {
 // Unauthorized access
 <UnauthorizedPage />
 
-// Management page header with title and optional actions
-<ManagementPageHeader title="Course Management">
-  <Button>Add Course</Button>
-</ManagementPageHeader>
+// Management page header — pass the title as children
+<ManagementPageHeader>Course Management</ManagementPageHeader>
 ```
 
 ---
@@ -343,11 +350,13 @@ toast({ title: 'Saved!', description: 'Your changes have been saved.' })
 // Detect mobile viewport
 const isMobile = useIsMobile()
 
-// Get an element's current width
-const { ref, width } = useCustomElementWidth()
+// Get an element's current width by element ID (returns a number)
+const width = useCustomElementWidth('my-element-id')
+// With optional pixel offset subtracted from the width:
+const widthWithOffset = useCustomElementWidth('my-element-id', 16)
 
-// Get current responsive breakpoint
-const { isSmall, isMedium, isLarge } = useScreenSize()
+// Get current screen dimensions
+const { width: screenWidth, height: screenHeight } = useScreenSize()
 ```
 
 ---
@@ -389,14 +398,14 @@ new ModuleFederationPlugin({
 
 ## Contributing
 
-As a member of the AET team, contribute changes by opening a pull request. Once merged into `main`, a GitHub Actions workflow automatically bumps the package version and publishes it to npm.
+As a member of the AET team, contribute changes by opening a pull request. Once merged, follow the release process described in the [repository root README](../README.md) to publish a new version.
 
-### Commit Message Keywords
+### Versioning & Publishing
 
-| Keyword | Effect | Example |
-|---|---|---|
-| `major` | `1.2.3` → `2.0.0` | Breaking API change |
-| `minor` | `1.2.3` → `1.3.0` | New feature, backwards compatible |
-| _(none)_ / `patch` | `1.2.3` → `1.2.4` | Bug fix or small improvement |
+Publishing is triggered by creating a **GitHub Release**. The steps are:
 
-After a successful publish, a PR with the new version number will be opened automatically — merge it immediately.
+1. Update the version in both `prompt-shared-state/package.json` and `prompt-ui-components/package.json` to the same value (or run `bump-version` via the manual GitHub Actions workflow).
+2. Create a GitHub Release with the tag `v{version}` (e.g., `v1.2.3`).
+3. The publish workflow automatically validates the version and publishes both packages to npm.
+
+See the [root README](../README.md) for full details.
