@@ -1,104 +1,202 @@
-# prompt-shared-state 
-A shared library for the **AET Prompt2** system that provides common interfaces and state management (via [Zustand](https://github.com/pmndrs/zustand)) across multiple microfrontends. 
+# prompt-shared-state
 
-## Overview 
-The **prompt-shared-state** package is designed to help multiple microfrontends share:
-- **Data** and **state** through a global [Zustand](https://github.com/pmndrs/zustand) store. 
-- **Common TypeScript interfaces** for consistent data modeling 
+A shared library for the **AET Prompt** system that provides common TypeScript interfaces and state management (via [Zustand](https://github.com/pmndrs/zustand)) across multiple microfrontends.
 
-By using this library, you ensure that all microfrontends reference the same store instance and interfaces, avoiding inconsistencies and duplication. 
+## Overview
 
-## Features 
-- **Shared Interfaces**: Commonly used interfaces that can be referenced by any microfrontend, ensuring a single source of truth for data structures. These shall also reflect the data structures used by the core API.
-- **Global State Management**: A single Zustand store instance shared across microfrontends. 
-- **Easy Integration**: Works seamlessly with Module Federation (Webpack 5), Yarn, and npm. 
+The **prompt-shared-state** package ensures that all microfrontends share:
 
-## Installation 
-Install the package with your preferred package manager: 
+- **Global state** through Zustand stores for authentication, course management, and more
+- **Common TypeScript interfaces** for consistent data modeling that mirrors the core API
 
-```bash 
-# Using Yarn 
-yarn add @tumaet/prompt-shared-state 
+By using this library, all microfrontends reference the same store instances and type definitions, eliminating state inconsistencies and data model duplication.
 
-# Or using npm 
-npm install @tumaet/prompt-shared-state 
+## Installation
+
+```bash
+# Using Yarn
+yarn add @tumaet/prompt-shared-state
+
+# Using npm
+npm install @tumaet/prompt-shared-state
 ```
 
-## Usage 
-### Shared Interfaces 
-All TypeScript interfaces needed by multiple microfrontends reside here. For example: 
+---
 
-```ts 
-import { SomeSharedInterface } from '@tumaet/prompt-shared-state'; 
+## Zustand Stores
 
-// Use this interface in your code const data: SomeSharedInterface = { // ... }; 
-``` 
-**Note**: If an interface is only relevant to one microfrontend, keep it local to that microfrontend rather than placing it here. 
+### useAuthStore
 
-### Global Zustand Store 
-The package provides a shared Zustand store that can be imported and used by any microfrontend. For example: 
+Manages authentication state and user permissions.
 
-```ts 
-import { useSharedStore } from '@tumaet/prompt-shared-state'; 
+```tsx
+import { useAuthStore } from '@tumaet/prompt-shared-state'
 
-function MyComponent() { 
-    const [sharedValue, setSharedValue] = useSharedStore((state) => [ 
-        state.sharedValue, state.setSharedValue, 
-    ]); 
-    
-    return ( 
-        <div> 
-            <p>Shared Value: {sharedValue}</p> 
-            <button onClick={() => setSharedValue('New Value')}> 
-                Update Shared Value 
-            </button> 
-        </div> 
-    ); 
-} 
-``` 
-Any changes to the store will be reflected across all microfrontends using this library. 
+function MyComponent() {
+  const { user, permissions, setUser, logout } = useAuthStore()
 
-### Module Federation Configuration 
-For the state to be truly _shared_ among all microfrontends, configure **Module Federation** to treat `@tumaet/prompt-shared-state` as a singleton: 
+  return (
+    <div>
+      <p>Logged in as: {user?.firstName} {user?.lastName}</p>
+      <button onClick={() => logout()}>Log out</button>
+    </div>
+  )
+}
+```
 
-```js 
-new ModuleFederationPlugin({ 
-    name: 'your-module', 
-    shared: { 
-        '@tumaet/prompt-shared-state': { 
-            singleton: true, 
-            requiredVersion: deps['@tumaet/prompt-shared-state'], 
-        }, 
-    // ...other shared dependencies 
-    }, 
-}); 
-``` 
-This ensures there is only **one** instance of the shared state library at runtime.
+**State & Actions:**
 
-## Best Practices 
-1. **Store Only Truly Shared Data** Keep only data in the global Zustand store that needs to be accessed by multiple microfrontends. 
-2. **Keep Interfaces Organized** Place only _truly global_ interfaces in this package. Any interface specific to a single module should remain in that module. 
-3. **Version Synchronization** Make sure all microfrontends use the same version of the shared package to avoid any incompatibilities.
-4. **Avoid Overexposing State** If you have sensitive or security-related information, think carefully about whether it needs to be available globally. --- 
+| Name | Type | Description |
+|---|---|---|
+| `user` | `User \| undefined` | The currently authenticated user |
+| `permissions` | `string[]` | List of permission strings for the current user |
+| `setUser(user)` | `(user: User) => void` | Set the authenticated user |
+| `clearUser()` | `() => void` | Clear the current user |
+| `setPermissions(permissions)` | `(permissions: string[]) => void` | Set user permissions |
+| `clearPermissions()` | `() => void` | Clear all permissions |
+| `logout(redirectUri?)` | `(redirectUri?: string) => void` | Log out and optionally redirect |
+| `setLogoutFunction(fn)` | `(logoutFunction: (redirectUri?: string) => void) => void` | Register the logout handler |
 
-## Publishing Process
+---
 
-As a member of the AET team, please contribute your changes by creating a pull request.
-Once your changes are reviewed and merged into the `main` branch, a GitHub workflow will automatically:
+### useCourseStore
 
-1. Bump the package version (according to the keyword in your commit message).
-2. Publish the updated package to the npm registry.
+Manages course data and the currently selected course. Course selection is persisted to localStorage.
 
-### Commit Message Keywords
-Include **one** of the following keywords in your commit message to indicate how the version should be bumped:
+```tsx
+import { useCourseStore } from '@tumaet/prompt-shared-state'
 
-- **major**  
-  - Increments the major version (e.g. `1.2.3` → `2.0.0`).
-- **minor**  
-  - Increments the minor version (e.g. `1.2.3` → `1.3.0`).
-- **(no keyword) or "patch"**  
-  - Increments the patch version by default (e.g. `1.2.3` → `1.2.4`).
+function CourseSelector() {
+  const { courses, getSelectedCourseID, setSelectedCourseID } = useCourseStore()
 
-If you do not include `major` or `minor` in your commit message, the workflow will assume a **patch** update.
+  return (
+    <select
+      value={getSelectedCourseID() ?? ''}
+      onChange={(e) => setSelectedCourseID(e.target.value)}
+    >
+      {courses.map((course) => (
+        <option key={course.id} value={course.id}>
+          {course.name}
+        </option>
+      ))}
+    </select>
+  )
+}
+```
 
-When the publishing worked, then a PR with a new version number has been opened. This shall be merged immediately. 
+**State & Actions:**
+
+| Name | Type | Description |
+|---|---|---|
+| `courses` | `Course[]` | All available courses |
+| `ownCourseIDs` | `string[]` | IDs of courses the user is enrolled in |
+| `setCourses(courses)` | `(courses: Course[]) => void` | Set the full course list |
+| `setOwnCourseIDs(ids)` | `(ids: string[]) => void` | Set IDs of the user's own courses |
+| `getSelectedCourseID()` | `() => string \| null` | Get the currently selected course ID |
+| `setSelectedCourseID(id)` | `(id: string) => void` | Select a course (persisted to localStorage) |
+| `removeSelectedCourseID()` | `() => void` | Clear the selected course |
+| `isStudentOfCourse(id)` | `(id: string) => boolean` | Check if the user is a student in a course |
+| `updateCourse(id, patch)` | `(id: string, patch: Partial<Course>) => void` | Partially update a course |
+
+---
+
+## TypeScript Interfaces
+
+All interfaces are exported from the package root and organized into categories:
+
+```ts
+import {
+  Course,
+  Student,
+  User,
+  CoursePhaseWithMetaData,
+  PassStatus,
+  Role,
+  ScoreLevel,
+} from '@tumaet/prompt-shared-state'
+```
+
+### Available Interfaces
+
+| Category | Key Exports | Description |
+|---|---|---|
+| **Course** | `Course`, `UpdateCourse`, `CourseType` | Course data and operations |
+| **Course Phase** | `CoursePhaseWithMetaData`, `CoursePhaseWithType`, `CreateCoursePhase`, `UpdateCoursePhase` | Course phase data and operations |
+| **Course Phase Type** | `CoursePhaseType`, `CoursePhaseTypeMetaDataItem` | Phase type metadata |
+| **Course Phase Participation** | `CoursePhaseParticipationWithStudent`, `CoursePhaseParticipationsWithResolution`, `UpdateCoursePhaseParticipation`, `UpdateCoursePhaseParticipationStatus` | Student participation in phases |
+| **Student** | `Student`, `Gender`, `StudyDegree` | Student profile data |
+| **User** | `User` | Authenticated user data |
+| **Person** | `Person` | Base person interface |
+| **Roles** | `Role`, `getPermissionString` | Role enum and permission utilities |
+| **Assessment** | `ScoreLevel`, `mapScoreLevelToNumber`, `mapNumberToScoreLevel` | Assessment score levels and mapping |
+| **Mailing** | `CourseMailingSettings`, `CoursePhaseMailingConfigData`, `MailingReport`, `SendStatusMail` | Email configuration and reporting |
+| **Application** | `ExportedApplicationAnswer` | Application submission data |
+| **Team** | `Team` | Team definitions |
+
+### Score Levels
+
+```ts
+import { ScoreLevel, mapScoreLevelToNumber, mapNumberToScoreLevel } from '@tumaet/prompt-shared-state'
+
+// Enum values: VeryGood, Good, Ok, Bad, VeryBad
+const level = ScoreLevel.Good
+const numeric = mapScoreLevelToNumber(ScoreLevel.Good)   // → number
+const back = mapNumberToScoreLevel(numeric)               // → ScoreLevel
+```
+
+### Roles
+
+```ts
+import { Role } from '@tumaet/prompt-shared-state'
+
+// Enum members: PROMPT_ADMIN, PROMPT_LECTURER, COURSE_LECTURER, COURSE_EDITOR, COURSE_STUDENT
+if (user.role === Role.PROMPT_ADMIN) {
+  // show admin UI
+}
+```
+
+---
+
+## Module Federation Configuration
+
+For the state to be truly shared across all microfrontends, configure **Module Federation** to treat `@tumaet/prompt-shared-state` as a singleton:
+
+```js
+new ModuleFederationPlugin({
+  name: 'your-module',
+  shared: {
+    '@tumaet/prompt-shared-state': {
+      singleton: true,
+      requiredVersion: deps['@tumaet/prompt-shared-state'],
+    },
+    // ...other shared dependencies
+  },
+})
+```
+
+This ensures there is only **one** instance of the shared state library at runtime. Without this, each microfrontend would have its own store and state changes would not propagate across apps.
+
+---
+
+## Best Practices
+
+1. **Store only truly shared data** — Only add state to Zustand stores that needs to be accessed by multiple microfrontends. Keep module-local state in the microfrontend itself.
+2. **Keep interfaces organized** — Only place interfaces in this package if they are used across multiple microfrontends. Module-specific interfaces should stay in that module.
+3. **Synchronize versions** — All microfrontends should use the same version of this package to avoid type and runtime incompatibilities.
+4. **Avoid overexposing sensitive state** — Think carefully before storing security-sensitive data in a globally shared store.
+
+---
+
+## Contributing
+
+As a member of the AET team, contribute changes by opening a pull request. Once merged, follow the release process described in the [repository root README](../README.md) to publish a new version.
+
+### Versioning & Publishing
+
+Publishing is triggered by creating a **GitHub Release**. The steps are:
+
+1. Update the version in both `prompt-shared-state/package.json` and `prompt-ui-components/package.json` to the same value (or run `bump-version` via the manual GitHub Actions workflow).
+2. Create a GitHub Release with the tag `v{version}` (e.g., `v1.2.3`).
+3. The publish workflow automatically validates the version and publishes both packages to npm.
+
+See the [root README](../README.md) for full details.
