@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 import { ErrorPage } from './ErrorPage'
 import { LoadingPage } from './LoadingPage'
 
@@ -17,7 +17,11 @@ export const useCombinedQueryState = (
   return {
     isPending: active.some((query) => query.isPending),
     isError: active.some((query) => query.isError),
-    refetch: () => active.forEach((query) => query.refetch()),
+    refetch: () => {
+      for (const query of active) {
+        query.refetch()
+      }
+    },
   }
 }
 
