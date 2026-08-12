@@ -33,6 +33,7 @@ export const Link = TiptapLink.extend({
       openOnClick: false,
       enableClickSelection: parentOptions?.enableClickSelection ?? false,
       linkOnPaste: parentOptions?.linkOnPaste ?? true,
+      markdownLinks: parentOptions?.markdownLinks ?? false,
       HTMLAttributes: {
         ...(parentOptions?.HTMLAttributes ?? {}),
         class: 'link',
