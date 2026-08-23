@@ -1,6 +1,6 @@
 {
   "name": "@tumaet/prompt-ui-components",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prompt-edu/prompt-lib.git"
@@ -98,7 +98,7 @@
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5.101.4",
-    "@tumaet/prompt-shared-state": "^1.1.1",
+    "@tumaet/prompt-shared-state": "^1.2.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2"
@@ -106,7 +106,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.7",
     "@tanstack/react-query": "^5.101.4",
-    "@tumaet/prompt-shared-state": "1.1.1",
+    "@tumaet/prompt-shared-state": "1.2.0",
     "@types/file-saver": "^2.0.7",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
