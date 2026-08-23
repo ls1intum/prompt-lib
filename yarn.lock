@@ -2818,7 +2818,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     highlight.js: "npm:^11.11.1"
     i18n-iso-countries: "npm:^7.14.0"
-    js-sha256: "npm:^0.12.0"
+    js-sha256: "npm:^1.0.0"
     lowlight: "npm:^3.3.0"
     lucide-react: "npm:^1.28.0"
     postcss: "npm:^8.5.25"
@@ -4204,13 +4204,6 @@ __metadata:
   version: 3.1.1
   resolution: "isexe@npm:3.1.1"
   checksum: 10c0/9ec257654093443eb0a528a9c8cbba9c0ca7616ccb40abd6dde7202734d96bb86e4ac0d764f0f8cd965856aacbff2f4ce23e730dc19dfb41e3b0d865ca6fdcc7
-  languageName: node
-  linkType: hard
-
-"js-sha256@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "js-sha256@npm:0.12.0"
-  checksum: 10c0/a145ed4e2d7f7e758e39a0327733efce90252bb5146aa0b38bd47771ce848aecfd5cb8c2ec1e16c9e1e36a15f1cd4f5bc49a9adc6f480de9fcab2346929988c7
   languageName: node
   linkType: hard
 
