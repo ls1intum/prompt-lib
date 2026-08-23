@@ -1,13 +1,16 @@
-import { flexRender, type HeaderGroup, type Table as ReactTable } from '@tanstack/react-table'
+import { flexRender, type RowData } from '@tanstack/react-table'
 import type { ReactElement } from 'react'
 import { TableHead, TableHeader, TableRow } from '../../../ui'
+import type { PromptTableHeader, PromptTableInstance } from '../tableFeatures'
 import { SortableHeader } from './SortableHeader'
 
-interface TableHeadersProps<TData> {
-  table: ReactTable<TData>
+interface TableHeadersProps<TData extends RowData> {
+  table: PromptTableInstance<TData>
 }
 
-export function TableHeaders<TData>({ table }: TableHeadersProps<TData>): ReactElement {
+export function TableHeaders<TData extends RowData>({
+  table,
+}: TableHeadersProps<TData>): ReactElement {
   return (
     <TableHeader className='bg-muted/100'>
       {table.getHeaderGroups().map((headerGroup) => (
@@ -23,7 +26,7 @@ export function TableHeaders<TData>({ table }: TableHeadersProps<TData>): ReactE
   )
 }
 
-function renderHeaderCell<TData>(header: HeaderGroup<TData>['headers'][number]) {
+function renderHeaderCell<TData extends RowData>(header: PromptTableHeader<TData>) {
   if (header.isPlaceholder) return null
 
   const def = header.column.columnDef.header

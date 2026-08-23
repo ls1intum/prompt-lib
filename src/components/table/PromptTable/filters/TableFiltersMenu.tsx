@@ -1,18 +1,23 @@
-import type { Table } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import { Filter } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui'
 import type { TableFilter } from '../PromptTableTypes'
+import type { PromptTableInstance } from '../tableFeatures'
 import { NumericRangeFilterSection } from './NumericRangeFilterSection'
 import { SelectFilterSection } from './SelectFilterSection'
 
-interface TableFiltersMenuProps {
-  table: Table<any>
-  filters: TableFilter[]
+interface TableFiltersMenuProps<TData extends RowData> {
+  table: PromptTableInstance<TData>
+  filters: TableFilter<TData>[]
   trigger?: ReactNode
 }
 
-export function TableFiltersMenu({ table, filters, trigger }: TableFiltersMenuProps) {
+export function TableFiltersMenu<TData extends RowData>({
+  table,
+  filters,
+  trigger,
+}: TableFiltersMenuProps<TData>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

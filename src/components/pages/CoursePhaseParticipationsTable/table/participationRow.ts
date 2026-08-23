@@ -1,9 +1,13 @@
-import type { AccessorFn, ColumnDef, FilterFn, SortingFn } from '@tanstack/react-table'
+import type { AccessorFn, FilterFn, SortFn } from '@tanstack/react-table'
 import type {
   CoursePhaseParticipationWithStudent,
   PassStatus,
   Student,
 } from '@tumaet/prompt-shared-state'
+import type {
+  PromptTableColumnDef,
+  PromptTableFeatures,
+} from '@/components/table/PromptTable/tableFeatures'
 
 export interface ParticipantRow {
   id: string
@@ -32,13 +36,13 @@ export interface ExtraParticipantColumn<TValue> {
   header: string
 
   accessorFn?: AccessorFn<ParticipantRow, TValue>
-  cell?: ColumnDef<ParticipantRow, TValue>['cell']
+  cell?: PromptTableColumnDef<ParticipantRow, TValue>['cell']
 
   enableSorting?: boolean
-  sortingFn?: SortingFn<ParticipantRow>
+  sortFn?: SortFn<PromptTableFeatures, ParticipantRow>
 
   enableColumnFilter?: boolean
-  filterFn?: FilterFn<ParticipantRow>
+  filterFn?: FilterFn<PromptTableFeatures, ParticipantRow>
 
   extraData: {
     courseParticipationID: string

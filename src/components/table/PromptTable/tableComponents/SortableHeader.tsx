@@ -1,13 +1,17 @@
-import type { Column } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import type { PromptTableColumn } from '../tableFeatures'
 
-interface SortableHeaderProps<TData> {
-  column: Column<TData, unknown>
+interface SortableHeaderProps<TData extends RowData> {
+  column: PromptTableColumn<TData>
   title: string
 }
 
-export function SortableHeader<TData>({ column, title }: SortableHeaderProps<TData>) {
+export function SortableHeader<TData extends RowData>({
+  column,
+  title,
+}: SortableHeaderProps<TData>) {
   return (
     <Button
       variant='ghost'

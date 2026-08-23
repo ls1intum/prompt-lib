@@ -1,9 +1,11 @@
-import type { ColumnDef } from '@tanstack/react-table'
 import { MoreHorizontal } from 'lucide-react'
 import { ActionsMenu } from '../../actions/ActionsMenu'
 import type { RowAction } from '../../PromptTableTypes'
+import type { PromptTableColumnDef } from '../../tableFeatures'
 
-export const actionColumn = <T extends { id: string }>(actions: RowAction<T>[]): ColumnDef<T> => ({
+export const actionColumn = <T extends { id: string }>(
+  actions: RowAction<T>[],
+): PromptTableColumnDef<T> => ({
   id: 'rowActions',
   header: '',
   enableSorting: false,

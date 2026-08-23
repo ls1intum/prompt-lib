@@ -1,19 +1,20 @@
-import type { Column } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import { DropdownMenuCheckboxItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui'
+import type { PromptTableColumn } from '../tableFeatures'
 
-interface SelectFilterSectionProps {
+interface SelectFilterSectionProps<TData extends RowData> {
   label: string
-  column: Column<any, unknown>
+  column: PromptTableColumn<TData>
   options: string[]
   getDisplay?: (value: string) => React.ReactNode
 }
 
-export function SelectFilterSection({
+export function SelectFilterSection<TData extends RowData>({
   label,
   column,
   options,
   getDisplay,
-}: SelectFilterSectionProps) {
+}: SelectFilterSectionProps<TData>) {
   const current = (column.getFilterValue() as string[]) ?? []
 
   return (

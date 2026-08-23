@@ -1,15 +1,19 @@
-import type { Table } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import type { TableFilter } from '../PromptTableTypes'
+import type { PromptTableInstance } from '../tableFeatures'
 import { FilterBadge } from './FilterBadge'
 import { tableFilterTypeDisplayFunction } from './filterbadgeFns'
 
-interface ActiveTableFiltersBarProps {
-  table: Table<any>
-  filters?: TableFilter[]
+interface ActiveTableFiltersBarProps<TData extends RowData> {
+  table: PromptTableInstance<TData>
+  filters?: TableFilter<TData>[]
 }
 
-export function ActiveTableFiltersBar({ table, filters = [] }: ActiveTableFiltersBarProps) {
-  const { globalFilter, columnFilters } = table.getState()
+export function ActiveTableFiltersBar<TData extends RowData>({
+  table,
+  filters = [],
+}: ActiveTableFiltersBarProps<TData>) {
+  const { globalFilter, columnFilters } = table.state
 
   if (!globalFilter && columnFilters.length === 0) {
     return null

@@ -1,8 +1,11 @@
 import { PassStatus } from '@tumaet/prompt-shared-state'
 import type { TableFilter } from '@/components'
 import { getStatusBadge, getStatusString } from '@/lib/getStatusBadge'
+import type { ParticipantRow } from './participationRow'
 
-export function getParticipantFilters(extraFilters: TableFilter[] = []): TableFilter[] {
+export function getParticipantFilters(
+  extraFilters: TableFilter<ParticipantRow>[] = [],
+): TableFilter<ParticipantRow>[] {
   return [
     {
       type: 'select',

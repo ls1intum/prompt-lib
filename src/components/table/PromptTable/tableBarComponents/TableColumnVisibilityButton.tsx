@@ -1,4 +1,4 @@
-import type { Table } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import { Columns } from 'lucide-react'
 import {
   Button,
@@ -8,12 +8,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui'
 import type { WithId } from '../PromptTableTypes'
+import type { PromptTableInstance } from '../tableFeatures'
 
-interface TableColumnVisibilityButtonProps<Type> {
-  table: Table<Type>
+interface TableColumnVisibilityButtonProps<Type extends RowData> {
+  table: PromptTableInstance<Type>
 }
 
-export function TableColumnVisibilityButton<Type extends WithId>({
+export function TableColumnVisibilityButton<Type extends WithId & RowData>({
   table,
 }: TableColumnVisibilityButtonProps<Type>): React.JSX.Element {
   const columns = table.getAllColumns()

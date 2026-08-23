@@ -1,4 +1,4 @@
-import type { ColumnFiltersState, SortingState } from '@tanstack/react-table'
+import type { ColumnFiltersState, RowData, SortingState } from '@tanstack/react-table'
 import type { TableFilter } from '../../PromptTable/PromptTableTypes'
 
 export function parseSortingFromUrl(search: string, paramName: string): SortingState {
@@ -37,10 +37,10 @@ export function serializeSortingForUrl(sorting: SortingState): string | null {
     .join(',')
 }
 
-export function parseColumnFiltersFromUrl(
+export function parseColumnFiltersFromUrl<TData extends RowData>(
   search: string,
   paramName: string,
-  tableFilters?: TableFilter[],
+  tableFilters?: TableFilter<TData>[],
 ): ColumnFiltersState {
   const serializedFilters = new URLSearchParams(search).get(paramName)
   if (!serializedFilters) return []
@@ -76,10 +76,10 @@ export function parseSearchFromUrl(search: string, paramName: string): string | 
   return new URLSearchParams(search).get(paramName)
 }
 
-function isValidFilterValue(
+function isValidFilterValue<TData extends RowData>(
   id: string,
   value: unknown,
-  tableFilters?: TableFilter[],
+  tableFilters?: TableFilter<TData>[],
 ): value is ColumnFiltersState[number]['value'] {
   if (value === null || value === undefined) return false
 

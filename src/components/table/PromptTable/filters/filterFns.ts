@@ -1,6 +1,11 @@
 import type { FilterFn } from '@tanstack/react-table'
+import type { PromptTableFeatures } from '../tableFeatures'
 
-export const multiSelectFilter: FilterFn<any> = (row, columnId, filterValue: string[]) => {
+export const multiSelectFilter: FilterFn<PromptTableFeatures, any> = (
+  row,
+  columnId,
+  filterValue: string[],
+) => {
   if (!Array.isArray(filterValue) || filterValue.length === 0) {
     return true
   }
@@ -9,7 +14,7 @@ export const multiSelectFilter: FilterFn<any> = (row, columnId, filterValue: str
   return filterValue.includes(rowValue)
 }
 
-export const numericRangeFilter: FilterFn<any> = (
+export const numericRangeFilter: FilterFn<PromptTableFeatures, any> = (
   row,
   columnId,
   filterValue: {

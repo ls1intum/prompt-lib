@@ -1,7 +1,7 @@
-import type { ColumnDef } from '@tanstack/react-table'
 import { Checkbox } from '@/components/ui'
+import type { PromptTableColumnDef } from '../../tableFeatures'
 
-export const checkboxColumn = <T extends { id: string }>(): ColumnDef<T> => ({
+export const checkboxColumn = <T extends { id: string }>(): PromptTableColumnDef<T> => ({
   id: 'select',
 
   header: ({ table }) => (

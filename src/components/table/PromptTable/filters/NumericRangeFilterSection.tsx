@@ -1,22 +1,23 @@
-import type { Column } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import {
   DropdownMenuCheckboxItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   Input,
 } from '@/components/ui'
+import type { PromptTableColumn } from '../tableFeatures'
 
-interface NumericRangeFilterSectionProps {
+interface NumericRangeFilterSectionProps<TData extends RowData> {
   label: string
-  column: Column<any, unknown>
+  column: PromptTableColumn<TData>
   noValueLabel?: string
 }
 
-export function NumericRangeFilterSection({
+export function NumericRangeFilterSection<TData extends RowData>({
   label,
   column,
   noValueLabel,
-}: NumericRangeFilterSectionProps) {
+}: NumericRangeFilterSectionProps<TData>) {
   const value =
     (column.getFilterValue() as {
       min?: string

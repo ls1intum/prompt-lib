@@ -1,19 +1,18 @@
+import type { ColumnFiltersState, RowData, SortingState } from '@tanstack/react-table'
 import type {
-  Column,
-  ColumnDef,
-  ColumnFiltersState,
-  InitialTableState,
-  SortingState,
-  Table,
-} from '@tanstack/react-table'
+  PromptTableColumn,
+  PromptTableColumnDef,
+  PromptTableCore,
+  PromptTableInitialState,
+} from './tableFeatures'
 
 export interface TableProps<T extends WithId> {
   data: T[]
   actions?: RowAction<T>[]
-  columns?: ColumnDef<T>[]
-  filters?: TableFilter[]
+  columns?: PromptTableColumnDef<T, any>[]
+  filters?: TableFilter<T>[]
   onRowClick?: (rowData: T) => void
-  initialState?: InitialTableState
+  initialState?: PromptTableInitialState
   onSortingChange?: (sorting: SortingState) => void
   onSearchChange?: (search: string) => void
   onColumnFiltersChange?: (columnFilters: ColumnFiltersState) => void
@@ -52,7 +51,7 @@ type TableFilterBase = {
   }
 }
 
-export type TableFilter =
+export type TableFilter<TData extends RowData = any> =
   | (TableFilterBase & {
       type: 'select'
       options: string[]
@@ -64,5 +63,8 @@ export type TableFilter =
     })
   | (TableFilterBase & {
       type: 'custom'
-      render: (args: { column: Column<any, unknown>; table: Table<any> }) => React.ReactNode
+      render: (args: {
+        column: PromptTableColumn<TData>
+        table: PromptTableCore<TData>
+      }) => React.ReactNode
     })

@@ -1,4 +1,4 @@
-import type { Table as ReactTable } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
 import type { ReactElement } from 'react'
 import {
@@ -9,15 +9,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui'
+import type { PromptTableInstance } from '../tableFeatures'
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100]
 
-interface TablePaginationProps<TData> {
-  table: ReactTable<TData>
+interface TablePaginationProps<TData extends RowData> {
+  table: PromptTableInstance<TData>
 }
 
-export function TablePagination<TData>({ table }: TablePaginationProps<TData>): ReactElement {
-  const { pageIndex, pageSize } = table.getState().pagination
+export function TablePagination<TData extends RowData>({
+  table,
+}: TablePaginationProps<TData>): ReactElement {
+  const { pageIndex, pageSize } = table.state.pagination
   const pageCount = table.getPageCount()
 
   return (

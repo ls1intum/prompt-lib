@@ -15,7 +15,7 @@ interface CoursePhaseParticipationsTablePageProps {
   phaseId: string
   participants: CoursePhaseParticipationWithStudent[]
   extraColumns?: ExtraParticipantColumn<any>[]
-  extraFilters?: TableFilter[]
+  extraFilters?: TableFilter<ParticipantRow>[]
   extraActions?: RowAction<ParticipantRow>[]
   exportDeps?: ExportDeps
   onClickRowAction?: (row: ParticipantRow) => void

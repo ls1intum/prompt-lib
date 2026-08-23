@@ -1,13 +1,13 @@
-import type { Table as ReactTable } from '@tanstack/react-table'
 import { MoreHorizontal } from 'lucide-react'
 import type { ReactElement } from 'react'
 import { Button } from '@/components/ui'
 import { ActionsMenu } from '../actions/ActionsMenu'
 import type { RowAction, WithId } from '../PromptTableTypes'
+import type { PromptTableInstance } from '../tableFeatures'
 
 interface TableActionsButtonProps<TData extends WithId> {
   actions: RowAction<TData>[]
-  table: ReactTable<TData>
+  table: PromptTableInstance<TData>
 }
 
 export function TableActionsButton<TData extends WithId>({
