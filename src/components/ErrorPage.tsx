@@ -1,6 +1,7 @@
 import { AlertCircle, LogOut, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 
 interface ErrorPageProps {
   title?: string
@@ -8,6 +9,7 @@ interface ErrorPageProps {
   message?: string
   onRetry?: () => void
   onLogout?: () => void
+  isRetrying?: boolean
 }
 
 export const ErrorPage = ({
@@ -17,6 +19,7 @@ export const ErrorPage = ({
   You can try to refresh or try again later.`,
   onRetry,
   onLogout,
+  isRetrying = false,
 }: ErrorPageProps) => {
   return (
     <div className='flex items-center justify-center min-h-screen'>
@@ -32,11 +35,10 @@ export const ErrorPage = ({
           <CardContent>
             <p className='text-sm text-muted-foreground mb-4'>{message}</p>
             {onRetry && (
-              <>
-                <Button onClick={onRetry} className='w-full mb-2'>
-                  <RefreshCw className='mr-2 h-4 w-4' /> Retry
-                </Button>
-              </>
+              <Button onClick={onRetry} disabled={isRetrying} className='w-full mb-2'>
+                <RefreshCw className={cn('mr-2 h-4 w-4', isRetrying && 'animate-spin')} />
+                {isRetrying ? 'Retrying...' : 'Retry'}
+              </Button>
             )}
             {onLogout && (
               <Button onClick={onLogout} variant='outline' className='w-full'>
