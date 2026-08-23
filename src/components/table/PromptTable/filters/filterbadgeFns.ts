@@ -1,3 +1,4 @@
+import type { RowData } from '@tanstack/react-table'
 import type { TableFilter } from '../PromptTableTypes'
 
 interface minMaxFilterType {
@@ -29,7 +30,9 @@ export function displayMinMaxActiveFilterBadgeValue(filtervalue: unknown) {
   return ''
 }
 
-export function tableFilterTypeDisplayFunction(tableFilter: TableFilter) {
+export function tableFilterTypeDisplayFunction<TData extends RowData>(
+  tableFilter: TableFilter<TData>,
+) {
   if (tableFilter.badge) {
     return tableFilter.badge.displayValue
   }

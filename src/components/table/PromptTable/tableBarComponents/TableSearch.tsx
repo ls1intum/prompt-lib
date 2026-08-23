@@ -1,18 +1,24 @@
-import type { Table as ReactTable } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import { Filter, SearchIcon } from 'lucide-react'
 import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } from 'react'
 import { Input } from '@/components/ui'
 import { TableFiltersMenu } from '../filters/TableFiltersMenu'
 import type { TableFilter } from '../PromptTableTypes'
+import type { PromptTableInstance } from '../tableFeatures'
 
-interface TableSearchProps {
+interface TableSearchProps<TData extends RowData> {
   value: string
   onChange: (value: string) => void
-  table?: ReactTable<any>
-  filters?: TableFilter[]
+  table?: PromptTableInstance<TData>
+  filters?: TableFilter<TData>[]
 }
 
-export function TableSearch({ value, onChange, table, filters }: TableSearchProps): ReactElement {
+export function TableSearch<TData extends RowData>({
+  value,
+  onChange,
+  table,
+  filters,
+}: TableSearchProps<TData>): ReactElement {
   const [inputValue, setInputValue] = useState(value)
   const skipNextSync = useRef(false)
 

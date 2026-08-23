@@ -1,9 +1,10 @@
-import type { ColumnFiltersState, InitialTableState, SortingState } from '@tanstack/react-table'
+import type { ColumnFiltersState, RowData, SortingState } from '@tanstack/react-table'
 import { useState } from 'react'
 import type { TableFilter } from '../../PromptTable/PromptTableTypes'
+import type { PromptTableInitialState } from '../../PromptTable/tableFeatures'
 import { parseColumnFiltersFromUrl, parseSearchFromUrl, parseSortingFromUrl } from './urlParsing'
 
-export function useTableUrlState({
+export function useTableUrlState<TData extends RowData>({
   initialState,
   filters,
   sortingQueryParamEnabled,
@@ -12,8 +13,8 @@ export function useTableUrlState({
   filteringQueryParamName,
   globalSearchQueryParamName,
 }: {
-  initialState?: InitialTableState
-  filters?: TableFilter[]
+  initialState?: PromptTableInitialState
+  filters?: TableFilter<TData>[]
   sortingQueryParamEnabled: boolean
   sortingQueryParamName: string
   filteringQueryParamEnabled: boolean

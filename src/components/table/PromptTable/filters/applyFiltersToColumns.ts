@@ -1,17 +1,18 @@
-import type { ColumnDef } from '@tanstack/react-table'
+import type { RowData } from '@tanstack/react-table'
 import type { TableFilter } from '../PromptTableTypes'
+import type { PromptTableColumnDef } from '../tableFeatures'
 import { multiSelectFilter, numericRangeFilter } from './filterFns'
 
-function isAccessorKeyColumn<T>(
-  column: ColumnDef<T>,
-): column is ColumnDef<T> & { accessorKey: string } {
+function isAccessorKeyColumn<T extends RowData>(
+  column: PromptTableColumnDef<T, any>,
+): column is PromptTableColumnDef<T, any> & { accessorKey: string } {
   return 'accessorKey' in column
 }
 
-export function addFiltersToColumns<T>(
-  columns: ColumnDef<T>[],
-  filters?: TableFilter[],
-): ColumnDef<T>[] {
+export function addFiltersToColumns<T extends RowData>(
+  columns: PromptTableColumnDef<T, any>[],
+  filters?: TableFilter<T>[],
+): PromptTableColumnDef<T, any>[] {
   if (!filters?.length) return columns
 
   return columns.map((column) => {

@@ -1,4 +1,4 @@
-import type { Table as ReactTable } from '@tanstack/react-table'
+import type { RowData, RowSelectionState } from '@tanstack/react-table'
 import { Columns } from 'lucide-react'
 import type { ReactElement } from 'react'
 import {
@@ -10,17 +10,18 @@ import {
 import { FilterBadge } from '../filters/FilterBadge'
 import { tableFilterTypeDisplayFunction } from '../filters/filterbadgeFns'
 import type { TableFilter } from '../PromptTableTypes'
+import type { PromptTableInstance } from '../tableFeatures'
 
-interface TableInfoTextProps<TData> {
-  table: ReactTable<TData>
-  filters?: TableFilter[]
+interface TableInfoTextProps<TData extends RowData> {
+  table: PromptTableInstance<TData>
+  filters?: TableFilter<TData>[]
 }
 
-export function TableInfoText<TData>({
+export function TableInfoText<TData extends RowData>({
   table,
   filters = [],
 }: TableInfoTextProps<TData>): ReactElement {
-  const { globalFilter, columnFilters } = table.getState()
+  const { globalFilter, columnFilters } = table.state
   const selectedCount = table.getSelectedRowModel().rows.length
   const filteredRows = table.getFilteredRowModel().rows
   const filteredSelectedCount = table.getFilteredSelectedRowModel().rows.length
@@ -30,7 +31,7 @@ export function TableInfoText<TData>({
   const visibleCount = hideableColumns.filter((col) => col.getIsVisible()).length
 
   const selectAllFiltered = () => {
-    const next: Record<string, boolean> = {}
+    const next: RowSelectionState = {}
     for (const row of filteredRows) next[row.id] = true
     table.setRowSelection(next)
   }

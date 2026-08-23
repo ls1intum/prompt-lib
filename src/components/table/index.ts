@@ -1,5 +1,6 @@
 export * from './PromptTable/PromptTable'
 export * from './PromptTable/PromptTableTypes'
 export * from './PromptTable/tableComponents/SortableHeader'
+export * from './PromptTable/tableFeatures'
 export * from './PromptTableURL/PromptTableURL'
 export * from './PromptTableURL/PromptTableURLTypes'

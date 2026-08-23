@@ -1,11 +1,11 @@
-import type { ColumnDef } from '@tanstack/react-table'
 import type { PassStatus } from '@tumaet/prompt-shared-state'
+import type { PromptTableColumnDef } from '@/components/table/PromptTable/tableFeatures'
 import { getStatusBadge } from '@/lib/getStatusBadge'
 import type { ExtraParticipantColumn, ParticipantRow } from './participationRow'
 
 export function getParticipantColumns(
   extraColumns: ExtraParticipantColumn<any>[],
-): ColumnDef<ParticipantRow, any>[] {
+): PromptTableColumnDef<ParticipantRow, any>[] {
   return [
     {
       accessorKey: 'firstName',
@@ -30,13 +30,13 @@ export function getParticipantColumns(
     },
 
     ...extraColumns.map(
-      (col): ColumnDef<ParticipantRow, any> => ({
+      (col): PromptTableColumnDef<ParticipantRow, any> => ({
         id: col.id,
         header: col.header,
         accessorFn: col.accessorFn!,
         cell: col.cell,
         enableSorting: col.enableSorting,
-        sortingFn: col.sortingFn,
+        sortFn: col.sortFn,
         enableColumnFilter: col.enableColumnFilter,
         filterFn: col.filterFn,
       }),

@@ -1,13 +1,17 @@
-import { flexRender, type Table as ReactTable } from '@tanstack/react-table'
+import { flexRender, type RowData } from '@tanstack/react-table'
 import type { ReactElement } from 'react'
 import { TableBody, TableCell, TableRow } from '../../../ui'
+import type { PromptTableInstance } from '../tableFeatures'
 
-interface TableRowsProps<TData> {
-  table: ReactTable<TData>
+interface TableRowsProps<TData extends RowData> {
+  table: PromptTableInstance<TData>
   onRowClick?: (rowData: TData) => void
 }
 
-export function TableRows<TData>({ table, onRowClick }: TableRowsProps<TData>): ReactElement {
+export function TableRows<TData extends RowData>({
+  table,
+  onRowClick,
+}: TableRowsProps<TData>): ReactElement {
   const rows = table.getRowModel().rows
 
   if (!rows.length) {
