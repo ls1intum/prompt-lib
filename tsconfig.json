@@ -3,6 +3,7 @@
     "target": "ESNext", // Use the latest ECMAScript features
     "module": "ESNext", // Specify the module system for ESM
     "moduleResolution": "bundler", // Resolve package export subpaths like @tiptap/react/menus
+    "rootDir": "./src", // Required explicitly since TypeScript 7
     "outDir": "dist", // Output directory for compiled files
     "declaration": true, // Generate TypeScript declaration files
     "declarationDir": "dist/types", // Output directory for type declarations
@@ -15,9 +16,8 @@
     "resolveJsonModule": true, // Allow importing JSON files as modules
     "noEmit": false, // Ensure that files are emitted
     "isolatedModules": true, // Transpile each file as a separate module
-    "baseUrl": "./", // Base URL for module resolution
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"],
