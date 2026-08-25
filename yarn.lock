@@ -5,18 +5,18 @@ __metadata:
   version: 10
   cacheKey: 10c0
 
-"@biomejs/biome@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/biome@npm:2.5.8"
+"@biomejs/biome@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/biome@npm:2.5.9"
   dependencies:
-    "@biomejs/cli-darwin-arm64": "npm:2.5.8"
-    "@biomejs/cli-darwin-x64": "npm:2.5.8"
-    "@biomejs/cli-linux-arm64": "npm:2.5.8"
-    "@biomejs/cli-linux-arm64-musl": "npm:2.5.8"
-    "@biomejs/cli-linux-x64": "npm:2.5.8"
-    "@biomejs/cli-linux-x64-musl": "npm:2.5.8"
-    "@biomejs/cli-win32-arm64": "npm:2.5.8"
-    "@biomejs/cli-win32-x64": "npm:2.5.8"
+    "@biomejs/cli-darwin-arm64": "npm:2.5.9"
+    "@biomejs/cli-darwin-x64": "npm:2.5.9"
+    "@biomejs/cli-linux-arm64": "npm:2.5.9"
+    "@biomejs/cli-linux-arm64-musl": "npm:2.5.9"
+    "@biomejs/cli-linux-x64": "npm:2.5.9"
+    "@biomejs/cli-linux-x64-musl": "npm:2.5.9"
+    "@biomejs/cli-win32-arm64": "npm:2.5.9"
+    "@biomejs/cli-win32-x64": "npm:2.5.9"
   dependenciesMeta:
     "@biomejs/cli-darwin-arm64":
       optional: true
@@ -36,62 +36,62 @@ __metadata:
       optional: true
   bin:
     biome: bin/biome
-  checksum: 10c0/244e17bc70d25cbbf0838ffc32e472a64ab4e19093c9603aa9e266b1f99a00d5b64590a52678a84ae60ac71e0f268efe437b16852e4c08ddce28131dd35847f3
+  checksum: 10c0/c3b7e47a1a51df2850ed5e82322e8ff58fd5ea19ec5035c5d8dedd6cc46f8e8e1fd6fd038191616738a9b42ced1f9b6674f88c73fea1a07edb450db9c94acf24
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-arm64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-darwin-arm64@npm:2.5.8"
+"@biomejs/cli-darwin-arm64@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-darwin-arm64@npm:2.5.9"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-x64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-darwin-x64@npm:2.5.8"
+"@biomejs/cli-darwin-x64@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-darwin-x64@npm:2.5.9"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64-musl@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.5.8"
+"@biomejs/cli-linux-arm64-musl@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.5.9"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-linux-arm64@npm:2.5.8"
+"@biomejs/cli-linux-arm64@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-linux-arm64@npm:2.5.9"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64-musl@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-linux-x64-musl@npm:2.5.8"
+"@biomejs/cli-linux-x64-musl@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-linux-x64-musl@npm:2.5.9"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-linux-x64@npm:2.5.8"
+"@biomejs/cli-linux-x64@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-linux-x64@npm:2.5.9"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-arm64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-win32-arm64@npm:2.5.8"
+"@biomejs/cli-win32-arm64@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-win32-arm64@npm:2.5.9"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-x64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "@biomejs/cli-win32-x64@npm:2.5.8"
+"@biomejs/cli-win32-x64@npm:2.5.9":
+  version: 2.5.9
+  resolution: "@biomejs/cli-win32-x64@npm:2.5.9"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -803,7 +803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/resolvers@npm:^5.9.0":
+"@hookform/resolvers@npm:^5.9.1":
   version: 5.9.1
   resolution: "@hookform/resolvers@npm:5.9.1"
   dependencies:
@@ -2777,8 +2777,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tumaet/prompt-ui-components@workspace:."
   dependencies:
-    "@biomejs/biome": "npm:2.5.8"
-    "@hookform/resolvers": "npm:^5.9.0"
+    "@biomejs/biome": "npm:2.5.9"
+    "@hookform/resolvers": "npm:^5.9.1"
     "@radix-ui/react-accordion": "npm:^1.2.20"
     "@radix-ui/react-alert-dialog": "npm:^1.1.23"
     "@radix-ui/react-avatar": "npm:^1.2.6"
@@ -2832,7 +2832,7 @@ __metadata:
     i18n-iso-countries: "npm:^7.14.0"
     js-sha256: "npm:^1.0.0"
     lowlight: "npm:^3.3.0"
-    lucide-react: "npm:^1.31.0"
+    lucide-react: "npm:^1.32.0"
     postcss: "npm:^8.5.26"
     postcss-cli: "npm:^11.0.1"
     postcss-preset-env: "npm:^11.4.0"
@@ -2845,7 +2845,7 @@ __metadata:
     recharts: "npm:^3.10.1"
     sonner: "npm:^2.0.8"
     tailwind-merge: "npm:^3.6.0"
-    tsc-alias: "npm:^1.9.1"
+    tsc-alias: "npm:^1.9.2"
     typescript: "npm:^7.0.2"
   peerDependencies:
     "@tanstack/react-query": ^5.101.4
@@ -4278,12 +4278,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^1.31.0":
-  version: 1.33.0
-  resolution: "lucide-react@npm:1.33.0"
+"lucide-react@npm:^1.32.0":
+  version: 1.34.0
+  resolution: "lucide-react@npm:1.34.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/b0aae7a46611211251748da141cc0cd8c3107e49e1c26833962d54779b60e0c8f97e21a6a71e658aadc5131551d9c08f7721dc22d7abee779d057e794d277451
+  checksum: 10c0/65fb34c3228c13891f7ad551461477de3ad4b5a1167091ddcf3138f3ff487e3355f1b78cbdd1c2e0b4fe58ab80ace0c5fa1a0dac9e62db760289f7237137d1b2
   languageName: node
   linkType: hard
 
@@ -5659,9 +5659,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsc-alias@npm:^1.9.1":
-  version: 1.9.1
-  resolution: "tsc-alias@npm:1.9.1"
+"tsc-alias@npm:^1.9.2":
+  version: 1.9.2
+  resolution: "tsc-alias@npm:1.9.2"
   dependencies:
     chokidar: "npm:^3.5.3"
     commander: "npm:^9.0.0"
@@ -5672,7 +5672,7 @@ __metadata:
     plimit-lit: "npm:^1.2.6"
   bin:
     tsc-alias: dist/bin/index.js
-  checksum: 10c0/b696508a671fdcd3e10fe6d88a64da77397811dbb7fd701623b8def2ae41f0cb7b39607de403873f072088dea8c6c10fc88ea3e65b6bb8a69635c9d61a935f77
+  checksum: 10c0/928acca5ae3a14ff6b54914985df5d4e6c240a771bbd3d68840a3b4c373bbf5dc8c6abd1d5b64f50c51518c4e59cf8dc98f5c3f5ddb3adc0e4b798d4942102f1
   languageName: node
   linkType: hard
 
