@@ -5,18 +5,18 @@ __metadata:
   version: 10
   cacheKey: 10c0
 
-"@biomejs/biome@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/biome@npm:2.5.9"
+"@biomejs/biome@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/biome@npm:2.5.10"
   dependencies:
-    "@biomejs/cli-darwin-arm64": "npm:2.5.9"
-    "@biomejs/cli-darwin-x64": "npm:2.5.9"
-    "@biomejs/cli-linux-arm64": "npm:2.5.9"
-    "@biomejs/cli-linux-arm64-musl": "npm:2.5.9"
-    "@biomejs/cli-linux-x64": "npm:2.5.9"
-    "@biomejs/cli-linux-x64-musl": "npm:2.5.9"
-    "@biomejs/cli-win32-arm64": "npm:2.5.9"
-    "@biomejs/cli-win32-x64": "npm:2.5.9"
+    "@biomejs/cli-darwin-arm64": "npm:2.5.10"
+    "@biomejs/cli-darwin-x64": "npm:2.5.10"
+    "@biomejs/cli-linux-arm64": "npm:2.5.10"
+    "@biomejs/cli-linux-arm64-musl": "npm:2.5.10"
+    "@biomejs/cli-linux-x64": "npm:2.5.10"
+    "@biomejs/cli-linux-x64-musl": "npm:2.5.10"
+    "@biomejs/cli-win32-arm64": "npm:2.5.10"
+    "@biomejs/cli-win32-x64": "npm:2.5.10"
   dependenciesMeta:
     "@biomejs/cli-darwin-arm64":
       optional: true
@@ -36,62 +36,62 @@ __metadata:
       optional: true
   bin:
     biome: bin/biome
-  checksum: 10c0/c3b7e47a1a51df2850ed5e82322e8ff58fd5ea19ec5035c5d8dedd6cc46f8e8e1fd6fd038191616738a9b42ced1f9b6674f88c73fea1a07edb450db9c94acf24
+  checksum: 10c0/486653f389d235abf2f899e6b1bc5ec548905d89f15ce5a3c60f673ed4c473eabdf9ad9cebbe5c1ef080739ebdda88402c58f64e2a055af3e319126f0fec1e93
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-arm64@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-darwin-arm64@npm:2.5.9"
+"@biomejs/cli-darwin-arm64@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-darwin-arm64@npm:2.5.10"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-x64@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-darwin-x64@npm:2.5.9"
+"@biomejs/cli-darwin-x64@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-darwin-x64@npm:2.5.10"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64-musl@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.5.9"
+"@biomejs/cli-linux-arm64-musl@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.5.10"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-linux-arm64@npm:2.5.9"
+"@biomejs/cli-linux-arm64@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-linux-arm64@npm:2.5.10"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64-musl@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-linux-x64-musl@npm:2.5.9"
+"@biomejs/cli-linux-x64-musl@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-linux-x64-musl@npm:2.5.10"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-linux-x64@npm:2.5.9"
+"@biomejs/cli-linux-x64@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-linux-x64@npm:2.5.10"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-arm64@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-win32-arm64@npm:2.5.9"
+"@biomejs/cli-win32-arm64@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-win32-arm64@npm:2.5.10"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-x64@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@biomejs/cli-win32-x64@npm:2.5.9"
+"@biomejs/cli-win32-x64@npm:2.5.10":
+  version: 2.5.10
+  resolution: "@biomejs/cli-win32-x64@npm:2.5.10"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -2311,21 +2311,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.101.4":
-  version: 5.101.4
-  resolution: "@tanstack/query-core@npm:5.101.4"
-  checksum: 10c0/a407960303431e6498c6518cf6f8cc7283d3e4a95dbdc5e9fa42c217b9dd7afaffb82a4f2d36b38f578f745e8cf69ff8551abb947f5abcc0a290f3e3e75dc654
+"@tanstack/query-core@npm:5.102.8":
+  version: 5.102.8
+  resolution: "@tanstack/query-core@npm:5.102.8"
+  checksum: 10c0/b8b8413c2372ff26605f63283f2bfe0edc17be1daad858a437d154ca38b30e8b6e47a5b8a0eb5c40b93fd66b8461f1cf2ac6cf5e1c9a03919d0079a0b4ae8bfa
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.101.4":
-  version: 5.101.4
-  resolution: "@tanstack/react-query@npm:5.101.4"
+"@tanstack/react-query@npm:^5.102.2":
+  version: 5.102.8
+  resolution: "@tanstack/react-query@npm:5.102.8"
   dependencies:
-    "@tanstack/query-core": "npm:5.101.4"
+    "@tanstack/query-core": "npm:5.102.8"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10c0/92e7c5b44740e753b05a6a19c166ea1a000df64c1bf5edb315d08a5b555a9f16a9d35288ac38f650bd38fc3015b135c392749fd6db24d09db42bfaf758d119fa
+  checksum: 10c0/cae0b1c9eb4b6cce8679ebe58d0391cd247bc26c39105aaa4d2c624db14deb8c051f747f714aaa0dbe6bb3ac94c70e30af6423090e9014aa5c7c6ef6cf5b4af4
   languageName: node
   linkType: hard
 
@@ -2777,7 +2777,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tumaet/prompt-ui-components@workspace:."
   dependencies:
-    "@biomejs/biome": "npm:2.5.9"
+    "@biomejs/biome": "npm:2.5.10"
     "@hookform/resolvers": "npm:^5.9.1"
     "@radix-ui/react-accordion": "npm:^1.2.20"
     "@radix-ui/react-alert-dialog": "npm:^1.1.23"
@@ -2800,7 +2800,7 @@ __metadata:
     "@radix-ui/react-toggle": "npm:^1.1.18"
     "@radix-ui/react-toggle-group": "npm:^1.1.19"
     "@radix-ui/react-tooltip": "npm:^1.2.16"
-    "@tanstack/react-query": "npm:^5.101.4"
+    "@tanstack/react-query": "npm:^5.102.2"
     "@tanstack/react-table": "npm:^9.1.2"
     "@tiptap/core": "npm:3.30.2"
     "@tiptap/extension-bubble-menu": "npm:3.30.2"
@@ -2822,7 +2822,7 @@ __metadata:
     "@tumaet/prompt-shared-state": "npm:1.2.0"
     "@types/file-saver": "npm:^2.0.7"
     "@types/react": "npm:^19.2.18"
-    "@types/react-dom": "npm:^19.2.4"
+    "@types/react-dom": "npm:^19.2.5"
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     cmdk: "npm:1.1.1"
@@ -2832,14 +2832,14 @@ __metadata:
     i18n-iso-countries: "npm:^7.14.0"
     js-sha256: "npm:^1.0.0"
     lowlight: "npm:^3.3.0"
-    lucide-react: "npm:^1.32.0"
+    lucide-react: "npm:^1.33.0"
     postcss: "npm:^8.5.26"
     postcss-cli: "npm:^11.0.1"
     postcss-preset-env: "npm:^11.4.0"
     react: "npm:^19.2.8"
     react-day-picker: "npm:8.10.2"
     react-dom: "npm:^19.2.8"
-    react-hook-form: "npm:^7.85.0"
+    react-hook-form: "npm:^7.86.0"
     react-medium-image-zoom: "npm:^5.4.9"
     react-router-dom: "npm:^7.18.2"
     recharts: "npm:^3.10.1"
@@ -2848,7 +2848,7 @@ __metadata:
     tsc-alias: "npm:^1.9.2"
     typescript: "npm:^7.0.2"
   peerDependencies:
-    "@tanstack/react-query": ^5.101.4
+    "@tanstack/react-query": ^5.102.2
     "@tumaet/prompt-shared-state": ^1.2.0
     react: ^19.2.8
     react-dom: ^19.2.8
@@ -2941,12 +2941,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19.2.4":
-  version: 19.2.4
-  resolution: "@types/react-dom@npm:19.2.4"
+"@types/react-dom@npm:^19.2.5":
+  version: 19.2.5
+  resolution: "@types/react-dom@npm:19.2.5"
   peerDependencies:
     "@types/react": ^19.2.0
-  checksum: 10c0/b7d854ce17bb51a3a067168268a90f0123d10dc490f63f1ff5409f07ac715febeb8f5b7b473404a9d437106571e0312fc2937a945634d590abfc9aa46a14b01b
+  checksum: 10c0/7a59467b043debf392d109daa1ba672e791f20ce6f24ae81fb54715f890f8119d24967e61e3644b6307428603b695b7d59e69eaf531bd1963a74a6cb462f5f49
   languageName: node
   linkType: hard
 
@@ -4278,12 +4278,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^1.32.0":
-  version: 1.34.0
-  resolution: "lucide-react@npm:1.34.0"
+"lucide-react@npm:^1.33.0":
+  version: 1.37.0
+  resolution: "lucide-react@npm:1.37.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/65fb34c3228c13891f7ad551461477de3ad4b5a1167091ddcf3138f3ff487e3355f1b78cbdd1c2e0b4fe58ab80ace0c5fa1a0dac9e62db760289f7237137d1b2
+  checksum: 10c0/827bdf1f39c5c86fad944260a97769302bdf06ed55d9d96059c5d362e9f1a0aaaede5fc9f31f3144a974e830003f5953e6c83bc3a5bc214c4c8d5110e78ec356
   languageName: node
   linkType: hard
 
@@ -5245,7 +5245,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.85.0":
+"react-hook-form@npm:^7.86.0":
   version: 7.86.0
   resolution: "react-hook-form@npm:7.86.0"
   peerDependencies:
