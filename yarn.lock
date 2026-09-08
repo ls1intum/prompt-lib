@@ -2396,15 +2396,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/core@npm:3.30.2":
-  version: 3.30.2
-  resolution: "@tiptap/core@npm:3.30.2"
-  peerDependencies:
-    "@tiptap/pm": 3.30.2
-  checksum: 10c0/810f55ded3efc69fc11a41e3d0c29f21f9d6c83efd4def87b81806d5942401a89912ac227ff34ddb6e5e25ce1bf793692cda2585d63e80d563f4e22b63e85221
-  languageName: node
-  linkType: hard
-
 "@tiptap/core@npm:3.31.0":
   version: 3.31.0
   resolution: "@tiptap/core@npm:3.31.0"
@@ -2837,7 +2828,7 @@ __metadata:
     "@radix-ui/react-tooltip": "npm:^1.2.16"
     "@tanstack/react-query": "npm:^5.102.8"
     "@tanstack/react-table": "npm:^9.2.4"
-    "@tiptap/core": "npm:3.30.2"
+    "@tiptap/core": "npm:3.31.0"
     "@tiptap/extension-bubble-menu": "npm:3.31.0"
     "@tiptap/extension-code-block": "npm:3.31.0"
     "@tiptap/extension-code-block-lowlight": "npm:3.31.0"
