@@ -66,6 +66,7 @@ export const CoursePhaseParticipationsTable = ({
       actions={actions}
       onRowClick={(row) => onClickRowAction?.(row)}
       initialState={{ columnVisibility: DEFAULT_HIDDEN_COLUMNS }}
+      enableColumnVisibilityToggle
     />
   )
 }

@@ -13,6 +13,7 @@ import { generateColumns } from './columns/generateColumns'
 import { addFiltersToColumns } from './filters/applyFiltersToColumns'
 import type { TableProps, WithId } from './PromptTableTypes'
 import { TableActionsButton } from './tableBarComponents/TableActionsButton'
+import { TableColumnVisibilityButton } from './tableBarComponents/TableColumnVisibilityButton'
 import { TableInfoText } from './tableBarComponents/TableInfoText'
 import { TablePagination } from './tableBarComponents/TablePagination'
 import { TableSearch } from './tableBarComponents/TableSearch'
@@ -28,6 +29,7 @@ export function PromptTable<T extends WithId>({
   filters,
   onRowClick,
   initialState,
+  enableColumnVisibilityToggle = false,
   onSortingChange,
   onSearchChange,
   onColumnFiltersChange,
@@ -83,7 +85,10 @@ export function PromptTable<T extends WithId>({
     <div className='flex flex-col gap-3 w-full'>
       <div className='flex items-center gap-2 justify-between'>
         <TableSearch value={search} onChange={handleSearchChange} table={table} filters={filters} />
-        {actions && <TableActionsButton table={table} actions={actions} />}
+        <div className='flex items-center gap-2'>
+          {enableColumnVisibilityToggle && <TableColumnVisibilityButton table={table} />}
+          {actions && <TableActionsButton table={table} actions={actions} />}
+        </div>
       </div>
 
       <TableInfoText table={table} filters={filters} />
